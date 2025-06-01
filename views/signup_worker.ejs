@@ -26,7 +26,16 @@
           <input type="number" id="signup-id" placeholder="Enter your Mobile Number" name="mobile" required />
 
           <label for="job">Job</label>
-          <input type="text" id="job" placeholder="Enter your Job" name="job" required />
+          <select id="job" name="job" required>
+            <option value="" disabled selected>Select your Job</option>
+            <option value="Carpenter">Carpenter</option>
+            <option value="Plumber">Plumber</option>
+            <option value="Electrician">Electrician</option>
+            <option value="Painter">Painter</option>
+            <option value="Mason">Mason</option>
+            <option value="Welder">Welder</option>
+          </select>
+
 
           <label for="location">Location</label>
           <input type="text" id="location" placeholder="Click to fetch location" name="formattedAddress" required onclick="getLocation()" />
