@@ -205,22 +205,32 @@
     </div>
   </footer>
 
-  <script>
-    const carouselContainer = document.querySelector('.carousel-container');
-    const slides = document.querySelectorAll('.carousel-slide');
-    let currentIndex = 0;
-    const intervalTime = 3000; // Change image every 3 seconds (adjust as needed)
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll(".carousel-slide");
+  const totalSlides = slides.length;
 
-    function nextSlide() {
-      slides[currentIndex].classList.remove('active');
-      currentIndex = (currentIndex + 1) % slides.length;
-      slides[currentIndex].classList.add('active');
-    }
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+      if (i === index) {
+        slide.classList.add("active");
+      }
+    });
+  }
 
-    setInterval(nextSlide, intervalTime);
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }
 
-    
-  </script>
+  // Initial display
+  showSlide(currentSlide);
+
+  // Change slide every 3 seconds (3000 ms)
+  setInterval(nextSlide, 3000);
+</script>
+
 
 </body>
 </html>
