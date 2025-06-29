@@ -12,7 +12,7 @@ const postSchema = mongoose.Schema({
         default:Date.now
     },
     name: String,
-    mobile : Number,
+    mobile : String,
     job: String,
     description : String,
     estimate_budget : Number,
