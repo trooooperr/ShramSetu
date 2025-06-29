@@ -111,7 +111,7 @@ app.post('/forgetPassword',async function(req,res){
         },
     });
 
-    const resetlink = `http://localhost:3000/resetPassword?token=${token}`;
+    const resetlink = `https://shram-setu.onrender.com/resetPassword?token=${token}`;
 
     const mailoptions = {
         from: '"Shram Setu" <shramsetumailer@gmail.com>',
