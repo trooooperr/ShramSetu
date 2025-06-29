@@ -1,142 +1,355 @@
-/* Reset styles */
-* {
+/* style.css */
+
+/* ==========================================================================
+   1. Global/Base Styles
+   ========================================================================== */
+
+body {
+  font-family: 'Inter', sans-serif; /* Consistent font */
+  color: #333; /* Dark text color */
+  line-height: 1.6;
+  background-color: #f7f9fc; /* Light gray background */
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  height: auto;
-  font-family: 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Body background */
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* instead of height */
-  background: #add8e6;
-  overflow-x: hidden;
-  padding: 20px;
-}
-
-/* Container */
 .container {
-  display: flex;
-  width: 90%;
-  max-width: 950px;
-  min-height: 70vh;  /* Use relative height */
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
-  border-radius: 14px;
-  overflow: hidden;
-  flex-wrap: wrap; /* ensures content doesn't overflow */
+  max-width: 1200px;
+  margin: 0 auto; /* Center container */
+  padding: 0 20px;
 }
-/* Left Panel (Logo + Tagline) */
-.left-panel {
-  background: #c7d2fe;
-  color: #0d3553;
-  width: 40%;
-  padding: 40px 30px;
+
+/* ==========================================================================
+   2. Header (Hero Section)
+   ========================================================================== */
+
+.custom-header {
+  height: 800px; /* Fixed height for the hero section */
+  background-color: #eff6ff; /* light blue background */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  padding-top: 4rem; /* Consistent top padding */
+  padding-bottom: 4rem; /* Consistent bottom padding */
+}
+
+/* ==========================================================================
+   3. Navigation
+   ========================================================================== */
+
+.main-header {
+  background: #fff;
+  padding: 1.2rem 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.left-panel .logo {
-  width: 210px;
-  height: 220px;
-}
-
-.left-panel .p {
-  font-size: 20px;
-  color: black;
+.header-logo {
+  font-size: 1.6rem;
   font-weight: 600;
+  color: #1a73e8;
+  text-decoration: none;
 }
 
-/* Right Panel (Form) */
-.right-panel {
-  background-color: white;
-  width: 60%;
-  padding: 40px;
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.form-box {
+.main-nav li {
+  margin-left: 2rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #555;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.main-nav a:hover {
+  color: #1a73e8;
+}
+
+/* ==========================================================================
+   4. Carousel
+   ========================================================================== */
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
   width: 100%;
+  max-width: 500px;
+  height: 400px;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px 1px rgba(0, 0, 0, 0.06);
 }
 
-.form-box h1 {
-  margin-bottom: 20px;
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+/* ==========================================================================
+   5. How It Works Section
+   ========================================================================== */
+
+.option-block {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.option-block:hover {
+  transform: scale(1.02); /* Slightly less aggressive scale */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   6. Why ShramSetu Section
+   ========================================================================== */
+
+.icon-block {
+  background-color: #f9f9f9; /* Light gray block */
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  padding: 2rem;
   text-align: center;
-  color:  #1E2D3D;
 }
 
-form {
+.icon-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+
+.icon-container {
+  background-color: #e0e8fa; /* Light cyan icon background */
+  color: #2563eb; /* Blue icon color */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.75rem;
+  margin: 0 auto 1rem;
+}
+
+.icon-title-block {
+  color: #2563eb; /* Dark blue */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.icon-text-block {
+  color: #4a5568; /* Gray */
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* ==========================================================================
+   7. Benefits Section
+   ========================================================================== */
+
+.page-container {
+  padding: 2rem 1.5rem 4rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-header h1 {
+  font-size: 2.4rem;
+  color: #1e1e1e;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.benefits-blocks-section {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.benefits-block {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  padding: 2rem;
+  flex: 1 1 500px;
+  max-width: 550px;
+  transition: box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 }
 
-form label {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #334155;
+.benefits-block:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-form input {
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-}
-
-/* Password eye icon */
-.input-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-.input-wrapper input {
-  width: 100%;
-  padding: 10px 40px 10px 10px; /* Add right padding for icon space */
-  border: 1px solid #cbd5e1;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.toggle-password {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  user-select: none;
-  font-size: 18px;
-  color: #64748b; /* muted slate */
-}
-
-/* Button */
-button {
-  margin-top: 20px;
-  padding: 12px;
-  background-color: #c7d2fe; 
-  border: none;
-  color: black;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background-color: #90a1c8;
-}
-
-/* Navigation link */
-p {
-  margin-top: 15px;
+.benefits-block h2 {
+  color: #1976d2;
+  font-size: 1.6rem; /* Slightly smaller for consistency */
+  font-weight: 600;
   text-align: center;
-  font-size: 14px;
+  margin-bottom: 1.5rem;
+}
+
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.benefit-item {
+  background: #f9f9f9;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease-in-out;
+  min-height: 110px;
+}
+
+.benefit-item:hover {
+  transform: translateY(-3px);
+}
+
+.benefit-icon-container {
+  background: #1976d2;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.benefit-text {
+  text-align: left;
+}
+
+.icon-title-block {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #333;
+  margin-bottom: 0.4rem;
+  text-align: left;
+}
+
+.icon-text-block {
+  font-size: 0.95rem;
+  color: #555;
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   8. Call to Action Button (Generic)
+   ========================================================================== */
+
+.explore-more-btn,
+.order-now-button {
+  background-color: #28a745; /* Default green, will be overridden for Explore More */
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.explore-more-btn {
+  background-color: #3b82f6; /* Blue for Explore More */
+}
+
+.explore-more-btn:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+.order-now-button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   9. Login Form Specific Styles
+   ========================================================================== */
+
+.login-card {
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  border-radius: 0.5rem; /* Added border-radius for consistency */
+  padding: 2rem; /* Added padding for better spacing */
+}
+
+.btn-primary {
+  background-color: #3b82f6; /* Blue color from landing page buttons */
+  color: white; /* Added white text for primary button */
+  padding: 0.75rem 1.5rem; /* Added padding for better button size */
+  border-radius: 0.375rem; /* Added border-radius for button */
+  text-decoration: none; /* Removed default link styling */
+  font-weight: 500; /* Added font-weight for emphasis */
+  display: inline-block; /* Ensures proper spacing */
+  transition: background-color 0.3s ease;
+  border: none; /* Removed default button border */
+  cursor: pointer; /* Added cursor for interaction */
+}
+
+.btn-primary:hover {
+  background-color: #2563eb; /* Darker blue on hover */
+}
+
+input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Navigation link within login */
+p {
+  margin-top: 1.5rem; /* Using rem for better scaling */
+  text-align: center;
+  font-size: 0.875rem; /* Using rem for better scaling */
 }
 
 a {
@@ -149,23 +362,272 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Responsive */
+/* ==========================================================================
+   10. Footer Styles
+   ========================================================================== */
+
+.main-footer {
+  background: #e0e0e0; /* Medium light grey footer background */
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 4rem;
+}
+
+/* ==========================================================================
+   Category Section (for More Categories Page)
+   ========================================================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 30px 30px 50px 30px;;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+  text-align: center;
+  color: #1976d2;
+  font-size: 2vw;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
+  gap: 20px;
+  padding: 20px;
+}
+
+.category-card {
+  background-color: #e3f2fd;
+  border-radius: 8px;
+  padding: 15px 20px;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.category-card a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.category-card i {
+  font-size: 1.8em;
+  color: #1976d2;
+}
+
+.more-button-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.more-button {
+  background-color: #1976d2;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none; /* removes underline */
+  transition: background 0.3s ease;
+}
+
+.more-button:hover {
+  background-color: #135ca0;
+  text-decoration: none;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    height: auto;
+  .categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
   }
 
-  .left-panel, .right-panel {
-    width: 100%;
-    height: auto;
+  .category-card {
+    padding: 15px;
   }
 
-  .left-panel {
-    padding: 30px;
+  .category-card i {
+    font-size: 1.5em;
+    margin-bottom: 8px;
   }
+}
 
-  .right-panel {
-    padding: 30px;
+/* ==========================================================================
+   Contact Us - Refined Styles
+   ========================================================================== */
+.contact-form-container {
+  background-color: #fff;
+  border-radius: 0.5rem; /* Tailwind default: rounded-lg */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); /* Tailwind default: shadow-md */
+  width: 100%;
+  max-width: 768px; /* Adjust as needed for your layout */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4rem; /* Equal top and bottom margin */
+  margin-bottom: 4rem; /* Equal top and bottom margin */
+  padding-top: 1.5rem; /* Tailwind default: pt-6 */
+  padding-right: 1.5rem; /* Tailwind default: pr-6 */
+  padding-bottom: 1.5rem; /* Adjust to be equal to top padding */
+  padding-left: 1.5rem; /* Tailwind default: pl-6 */
+}
+
+@media (min-width: 768px) {
+  .contact-form-container {
+    padding-top: 2rem; /* Tailwind default: md:pt-8 */
+    padding-right: 2rem; /* Tailwind default: md:pr-8 */
+    padding-bottom: 2rem; /* Equal to top padding */
+    padding-left: 2rem; /* Tailwind default: md:pl-8 */
   }
+}
+
+@media (min-width: 1024px) {
+  .contact-form-container {
+    padding-top: 2.5rem; /* Adjust as needed */
+    padding-right: 2.5rem; /* Adjust as needed */
+    padding-bottom: 2.5rem; /* Equal to top padding */
+    padding-left: 2.5rem; /* Adjust as needed */
+    max-width: 50%; /* Adjust width on larger screens */
+  }
+}
+
+.contact-form-header {
+  text-align: center;
+  margin-bottom: 1.5rem; /* Tailwind default: mb-6 */
+}
+
+.contact-form-title {
+  font-size: 1.25rem; /* Tailwind default: text-xl */
+  font-weight: 600; /* Tailwind default: font-semibold */
+  color: #2d3748; /* Tailwind default: text-gray-800 */
+  margin-bottom: 0.5rem; /* Tailwind default: mb-2 */
+}
+
+.contact-form-description {
+  color: #718096; /* Tailwind default: text-gray-600 */
+  font-size: 0.875rem; /* Tailwind default: text-sm */
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Adjust spacing between form elements */
+}
+
+.contact-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form-label {
+  color: #4a5568; /* Tailwind default: text-gray-700 */
+  font-size: 0.875rem; /* Tailwind default: text-sm */
+  font-weight: 500; /* Tailwind default: font-medium */
+  margin-bottom: 0.5rem; /* Tailwind default: mb-2 */
+  text-align: left;
+}
+
+.contact-form-input,
+.contact-form-textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem; /* Tailwind default: rounded */
+  border-width: 1px;
+  border-color: #cbd5e0; /* Tailwind default: border-gray-400 */
+  padding: 0.75rem; /* Tailwind default: py-2 px-3 */
+  color: #4a5568; /* Tailwind default: text-gray-700 */
+  line-height: 1.5; /* Tailwind default: leading-tight */
+  width: 100%;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.contact-form-input:focus,
+.contact-form-textarea:focus {
+  outline: none;
+  border-color: #63b3ed; /* Tailwind default: border-blue-300 */
+  box-shadow: 0 0 0 0.2rem rgba(66, 153, 225, 0.25); /* Tailwind default: ring-blue-200 */
+}
+
+/* .contact-form-textarea {
+  rows: 4;
+} */
+
+.contact-form-button-container {
+  text-align: center;
+}
+
+.contact-form-button {
+  background-color: #28a745; /* Your secondary color */
+  color: #fff;
+  font-weight: 600; /* Tailwind default: font-semibold */
+  padding: 0.75rem 1.5rem; /* Tailwind default: py-3 px-6 */
+  border-radius: 0.25rem; /* Tailwind default: rounded-md */
+  transition: background-color 0.15s ease-in-out;
+  cursor: pointer;
+  border: none;
+}
+
+.contact-form-button:hover {
+  background-color: #1e7e34; /* Darker shade of your secondary color */
+}
+
+.contact-form-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); /* Ring color based on secondary */
+}
+
+/* Responsive Grid for Categories */
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.gap-6 {
+  gap: 1.5rem; /* Tailwind default */
+}
+
+.mt-8 {
+  margin-top: 2rem; /* Tailwind default */
+}
+
+.mt-12 {
+  margin-top: 3rem; /* Tailwind default */
+}
+
+.bg-gray-100 {
+  background-color: #f7fafc; /* Tailwind default */
 }

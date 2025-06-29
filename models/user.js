@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
     name:String,
     mobile:Number,
+    email:String,
     password:String,
     latitude:Number,
     longitude:Number,
@@ -17,7 +18,9 @@ const userSchema = mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:'post'
         }
-    ]
+    ],
+    resetToken: String,
+    resetTokenExpiry: Date
 });
 
 module.exports = mongoose.model('user',userSchema);

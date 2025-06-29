@@ -11,8 +11,14 @@ const postSchema = mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    worker: String,
-    content : String,
+    name: String,
+    mobile : Number,
+    job: String,
+    description : String,
+    estimate_budget : Number,
+    latitude:Number,
+    longitude:Number,
+    formattedAddress:String,
     work_done :
     {
         type:String,

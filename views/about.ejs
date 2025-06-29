@@ -2,173 +2,403 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us - Dark Mode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShramSetu | About Us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    :root {
-      --bg-color:#e0e7ff;
-      --text-color: black;
-      --accent-color: #00a8d5;
-      --card-bg: white;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* about-us-enhanced-team.css */
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      padding: 20px;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #f7faff; /* Light gray background */
+      color: #374151; /* Dark gray text */
     }
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      background: var(--card-bg);
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+    .about-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 3rem;
+      background-color: #fff;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     }
 
-    h1, h2 {
-      color: var(--accent-color);
-      margin-bottom: 20px;
-    }
-
-    p {
-      margin-bottom: 18px;
-      line-height: 1.7;
-    }
-
-    .hero-image {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 25px;
-    }
-
-    .section {
-      margin-top: 40px;
-    }
-
-    .team-members {
-      display: flex;
-      gap: 30px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .member {
-      background: #e0e7ff;
-      padding: 20px;
-      border-radius: 10px;
+    .section-title-container {
       text-align: center;
-      width: 220px;
-      transition: transform 0.3s ease;
+      margin-bottom: 3rem;
     }
 
-    .member:hover {
-      transform: scale(1.05);
+    .section-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #1e88e5; /* Primary blue */
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
     }
 
-    .member img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 10px;
-      border: 3px solid var(--accent-color);
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: #757575; /* Medium gray */
+      font-style: italic;
     }
 
-    .member h3 {
-      margin: 10px 0 5px;
+    .intro-section {
+      background-color: #e3f2fd; /* Very light blue */
+      border-radius: 0.75rem;
+      padding: 3rem;
+      margin-bottom: 3rem;
     }
 
-    .gallery {
+    .intro-section h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #1976d2; /* Strong blue */
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .intro-section p {
+      font-size: 1.1rem;
+      color: #546e7a; /* Blue-gray text */
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .our-mission-section,
+    .our-vision-section {
+      padding: 3rem 0;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid #e0e0e0; /* Subtle divider */
+    }
+
+    .our-mission-section:last-child,
+    .our-vision-section:last-child {
+      border-bottom: none;
+    }
+
+    .mission-vision-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .mission-vision-content h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1e88e5; /* Primary blue */
+      margin-bottom: 1rem;
+    }
+
+    .mission-vision-content p {
+      font-size: 1.1rem;
+      color: #546e7a; /* Blue-gray text */
+      line-height: 1.8;
+    }
+
+    .team-section {
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .team-section h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #1e88e5; /* Primary blue */
+      margin-bottom: 2rem;
+    }
+
+    .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted min width */
+      gap: 2rem;
+      max-width: 1100px; /* Adjusted max width */
+      margin: 0 auto;
     }
 
-    .gallery img {
+    .team-member {
+      background-color: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); /* Slightly more shadow */
+      padding: 1.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .team-member .photo-container {
+      width: 120px; /* Increased size */
+      height: 150px; /* Portrait aspect ratio */
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .team-member img {
       width: 100%;
-      border-radius: 8px;
-      transition: transform 0.3s ease;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .gallery img:hover {
-      transform: scale(1.05);
+    .team-member h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #263238; /* Dark blue-gray */
+      margin-bottom: 0.3rem;
     }
 
-    @media (max-width: 600px) {
-      .member {
-        width: 100%;
-      }
+    .team-member p.designation {
+      font-size: 0.9rem;
+      color: #546e7a; /* Blue-gray */
+      margin-bottom: 0.6rem;
+    }
+
+    .team-member .social-links {
+      display: flex;
+      gap: 0.7rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .team-member .social-links a {
+      color: #546e7a; /* Blue-gray */
+      font-size: 1rem;
+      transition: color 0.2s ease-in-out;
+    }
+
+    .team-member .social-links a:hover {
+      color: #1976d2; /* Strong blue */
+    }
+
+    .team-member .note {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #78909c; /* Light blue-gray */
+      line-height: 1.6;
+    }
+
+    .our-values-section {
+      padding: 3rem 0;
+      background-color: #e3f2fd; /* Very light blue */
+    }
+
+    .our-values-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .our-values-container h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #1e88e5; /* Primary blue */
+      margin-bottom: 2rem;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .value {
+      background-color: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .value i {
+      font-size: 1.8rem;
+      color: #1976d2; /* Strong blue */
+      margin-bottom: 0.8rem;
+    }
+
+    .value h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #263238; /* Dark blue-gray */
+      margin-bottom: 0.3rem;
+    }
+
+    .value p {
+      font-size: 0.95rem;
+      color: #546e7a; /* Blue-gray */
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <section class="intro">
-      <h1>About Us</h1>
-      <img src="https://via.placeholder.com/1000x400?text=Our+Journey" class="hero-image" alt="Our Journey">
-      <p>
-        Welcome to our digital hub! We're a team of passionate creators, developers, and thinkers who believe in using technology to improve lives.
-        Our journey started with a simple idea – to build tools that make your day-to-day life smoother, smarter, and more connected.
-      </p>
-      <p>
-        Whether you're a student, entrepreneur, or tech enthusiast, we’re here to help you with innovative solutions powered by modern technology.
-        We value collaboration, simplicity, and pushing boundaries.
-      </p>
+
+  <nav class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between py-4">
+        <div class="hidden sm:flex items-center space-x-5">
+          <a href="/" class="text-3xl font-bold text-blue-700 no-underline hover:no-underline">ShramSetu</a>
+        </div>
+        <div class="hidden sm:flex items-center space-x-5">
+          <a href="/landingpage#whyShramSetu" class="text-gray-700 hover:text-blue-600 hover:no-underline">Why ShramSetu</a>
+          <a href="/landingpage#howItWork" class="text-gray-700 hover:text-blue-600 hover:no-underline">How It Work</a>
+          <a href="/landingpage#categories" class="text-gray-700 hover:text-blue-600 hover:no-underline">Categories</a>
+          <a href="/landingpage#benefits" class="text-gray-700 hover:text-blue-600 hover:no-underline">Benefits</a>
+          <a href="/landingpage#contact" class="text-gray-700 hover:text-blue-600 hover:no-underline">Contact Us</a>
+          <a href="/login_user" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-semibold no-underline hover:no-underline">Join</a>
+        </div>
+        <div class="-mr-2 flex items-center sm:hidden">
+          <button class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="about-container">
+    <section class="section-title-container">
+      <h2 class="section-title">About ShramSetu</h2>
+      <p class="section-subtitle">Our story, mission, and the people behind it.</p>
     </section>
 
-    <section class="section team">
-      <h2>Meet the Team</h2>
-      <div class="team-members">
-        <div class="member">
-          <img src="/images/chaitanya.jpg" alt="Chaitanya Bishnoi" />
+    <section class="intro-section">
+      <h2 class="text-2xl font-semibold text-center text-blue-600 mb-1">Connecting India's Workforce, Empowering Futures</h2>
+      <p class="text-lg text-gray-700 leading-relaxed text-center">ShramSetu is driven by a vision to create a more equitable and efficient employment landscape in India. We believe in the power of connection and are committed to providing a platform that benefits both skilled individuals and businesses seeking talent.</p>
+    </section>
+
+    <section class="our-mission-section">
+      <div class="mission-vision-content">
+        <h2>Our Mission</h2>
+        <p>To empower India's workforce by building a user-friendly and reliable platform that seamlessly connects skilled individuals with diverse job opportunities, fostering economic growth and personal development.</p>
+      </div>
+    </section>
+
+    <section class="our-vision-section">
+      <div class="mission-vision-content">
+        <h2>Our Vision</h2>
+        <p>To be the leading and most trusted national platform for workforce connection, recognized for its positive impact on employment rates, economic empowerment, and the overall prosperity of India.</p>
+      </div>
+    </section>
+
+    <section class="team-section">
+      <h2>Meet Our Leadership Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="photo-container">
+            <img src="/images/alok.jpg" alt="Alok Kumar Gupta">
+          </div>
+          <h3>Alok Kumar Gupta</h3>
+          <p class="designation">Lead Frontend Architect</p>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/trooperr" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a href="#" aria-label="GitHub" title="GitHub"><i class="fab fa-github fa-lg"></i></a>
+            <a href="#" aria-label="Email" title="Email"><i class="fas fa-envelope fa-lg"></i></a>
+          </div>
+          <p class="note">"I'm passionate about creating intuitive and engaging user experiences that make ShramSetu accessible to everyone."</p>
+        </div>
+        <div class="team-member">
+          <div class="photo-container">
+            <img src="/images/chaitanya.jpg" alt="Chaitanya Bishnoi">
+          </div>
           <h3>Chaitanya Bishnoi</h3>
-          <p>Lead Developer</p>
+          <p class="designation">Lead Backend Engineer</p>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/chaitanya-bishnoi-8419a4214/" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a href="https://github.com/Chaitanya123-web?tab=repositories" aria-label="GitHub" title="GitHub"><i class="fab fa-github fa-lg"></i></a>
+            <a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSBnNPXWLTsGZJDJzlWVbwTdSgMMzLwSZvRnmLCghjSFcKdcTvtShlLgzVXBHxpPxqFvxSWP" aria-label="Email" title="Email"><i class="fas fa-envelope fa-lg"></i></a>
+          </div>
+          <p class="note">"Building a robust and scalable backend infrastructure is key to ShramSetu's reliability and future growth."</p>
         </div>
-        <div class="member">
-          <img src="/images/ayushyadav.jpg" alt="Ayush Yadav" />
-          <h3>Ayush Yadav</h3>
-          <p>Frontend developer</p>
         </div>
-        <div class="member">
-          <img src="/images/chaman.jpg" alt="Chaman Bhardwaj" />
-          <h3>Chaman Bhardwaj</h3>
-          <p>Product Strategist</p>
-        </div>
-        <div class="member">
-          <img src="/images/ayushraj1.jpg" alt="Ayush Raj" />
-          <h3>Ayush Raj</h3>
-          <p>Frontend developer</p>
-        </div>
-      </div>
     </section>
 
-    <section class="section vision">
-      <h2>Our Vision</h2>
-      <p>
-        We aim to empower the next generation of digital builders. From AI-driven applications to interactive web experiences, we focus on delivering
-        high-quality, accessible, and scalable solutions for everyone.
-      </p>
-    </section>
-
-    <section class="section gallery">
-      <h2>Gallery</h2>
-      <div class="gallery">
-        <img src="https://via.placeholder.com/400x250?text=Office+Vibes" alt="Office Vibes" />
-        <img src="https://via.placeholder.com/400x250?text=Team+Meet" alt="Team Meet" />
-        <img src="https://via.placeholder.com/400x250?text=Project+Demo" alt="Project Demo" />
-        <img src="https://via.placeholder.com/400x250?text=Hackathon+2024" alt="Hackathon 2024" />
+    <section class="our-values-section">
+      <div class="our-values-container">
+        <h2>Our Core Values</h2>
+        <div class="values-grid">
+          <div class="value">
+            <i class="fas fa-users fa-2x" style="color: #1976d2;"></i>
+            <h3>Empowerment</h3>
+            <p>We empower individuals by providing access to opportunities and resources for career growth.</p>
+          </div>
+          <div class="value">
+            <i class="fas fa-connectdevelop fa-2x" style="color: #1976d2;"></i>
+            <h3>Connectivity</h3>
+            <p>We foster meaningful connections between job seekers and employers, creating a vibrant ecosystem.</p>
+          </div>
+          <div class="value">
+            <i class="fas fa-handshake fa-2x" style="color: #1976d2;"></i>
+            <h3>Trust & Reliability</h3>
+            <p>We are committed to building a trustworthy and reliable platform through transparency and integrity.</p>
+          </div>
+          <div class="value">
+            <i class="fas fa-lightbulb fa-2x" style="color: #1976d2;"></i>
+            <h3>Innovation</h3>
+            <p>We continuously strive for innovative solutions and technologies to improve the ShramSetu experience.</p>
+          </div>
+          </div>
       </div>
     </section>
+  </main>
+
+  <footer class="bg-gray-800 text-gray-300 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="grid gap-8 items-start"
+        style="grid-template-columns: 2fr 1fr 1fr 1fr;"
+      >
+        <div class="flex flex-col items-center text-center h-full justify-center">
+          <div>
+            <h4 class="text-lg font-semibold text-white mb-2">ShramSetu</h4>
+            <p class="text-sm text-gray-300">Connecting skilled laborers with opportunities.</p>
+          </div>
+          <div class="mt-6">
+            <p class="text-sm text-gray-300">&copy; 2025 ShramSetu. All rights reserved.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-start">
+          <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/landingpage#whyShramSetu" class="hover:text-gray-100">Why ShramSetu</a></li>
+            <li><a href="/landingpage#howItWork" class="hover:text-gray-100">How It Works</a></li>
+            <li><a href="/landingpage#categories" class="hover:text-gray-100">Categories</a></li>
+            <li><a href="/landingpage#benefits" class="hover:text-gray-100">Benefits</a></li>
+            <li><a href="/about" class="hover:text-gray-100">About Us</a></li>
+            <li><a href="/landingpage#contact" class="hover:text-gray-100">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col justify-start">
+          <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/legal" class="hover:text-gray-100">Privacy Policy</a></li>
+            <li><a href="/terms" class="hover:text-gray-100">Terms of Service</a></li>
+            <li><a href="/disclaimer" class="hover:text-gray-100">Disclaimer</a></li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col justify-start">
+          <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center text-sm" style="color: grey;">
+    <p>ShramSetu - Empowering Connections Across India</p>
   </div>
+    </div>
+  </footer>
+
 </body>
 </html>
