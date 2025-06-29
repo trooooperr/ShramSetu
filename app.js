@@ -1,6 +1,7 @@
 require('dotenv').config();
 console.log("USE_LOCAL_DB:", process.env.USE_LOCAL_DB);
 console.log("LOCAL_MONGO_URI:", process.env.LOCAL_MONGO_URI);
+console.log("LOCAL_MONGO_URI:", process.env.CLOUD_MONGO_URI);
 
 const express = require('express');
 const app = express();
