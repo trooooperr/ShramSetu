@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShramSetu | Login</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          },
+          colors: {
+            primary: '#1976D2',
+            bgLight: '#F0F4FA',
+            cardBG: '#e8f1ff'
+          },
+          boxShadow: {
+            card: '0 4px 14px rgba(21, 101, 192, 0.15)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #3b82f6, #2563eb);
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+      outline: none;
+    }
+  </style>
+</head>
+
+<body class="bg-bgLight text-gray-800">
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works - For Workers | ShramSetu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body class="bg-blue-50 text-gray-800">
+
+<!-- ✅ Alpine Wrapper -->
+<div x-data="{ open: false }">
+  <!-- ✅ Navbar -->
+  <nav class="bg-[#cceaff] shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <!-- Logo -->
+        <a href="/" class="text-3xl font-bold text-blue-700">ShramSetu</a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="#whyShramSetu" class="text-gray-700 font-semibold hover:text-blue-600">Why ShramSetu</a>
+          <a href="/hire" class="text-gray-700 font-semibold hover:text-blue-600">Hire ShramSevik</a>
+          <a href="/work" class="text-gray-700 font-semibold hover:text-blue-600">Find Work</a>
+          <a href="#categories" class="text-gray-700 font-semibold hover:text-blue-600">Categories</a>
+          <a href="/landingpage#benefits" class="text-gray-700 font-semibold hover:text-blue-600">Benefits</a>
+          <a href="/login_user" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-semibold">Join</a>
+        </div>
+
+        <!-- Hamburger Icon (Mobile) -->
+        <div class="md:hidden">
+          <button @click="open = !open" type="button"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-700 hover:bg-blue-100">
+            <svg x-show="!open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg x-show="open" x-cloak class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📱 Mobile Drawer -->
+    <div x-show="open" x-transition x-cloak @click.away="open = false"
+      class="md:hidden fixed top-16 left-0 right-0 w-full bg-[#cceaff] px-6 py-4 space-y-3 rounded-b-3xl shadow-md z-40">
+      <a href="#whyShramSetu" class="flex items-center gap-2 p-2 rounded-xl hover:bg-blue-200 shadow">
+        <div class="w-9 h-9 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <span class="text-base font-medium">Why ShramSetu</span>
+      </a>
+      <a href="/hire" class="flex items-center gap-2 p-2 rounded-xl hover:bg-green-100 shadow">
+        <div class="w-9 h-9 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <span class="text-base font-medium">Hire ShramSevik</span>
+      </a>
+      <a href="/work" class="flex items-center gap-2 p-2 rounded-xl hover:bg-indigo-100 shadow">
+        <div class="w-9 h-9 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-hammer"></i>
+        </div>
+        <span class="text-base font-medium">Find Work</span>
+      </a>
+      <a href="#categories" class="flex items-center gap-2 p-2 rounded-xl hover:bg-sky-100 shadow">
+        <div class="w-9 h-9 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-th-large"></i>
+        </div>
+        <span class="text-base font-medium">Categories</span>
+      </a>
+      <a href="/about" class="flex items-center gap-2 p-2 rounded-xl hover:bg-pink-100 shadow">
+        <div class="w-9 h-9 bg-pink-100 text-pink-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-users"></i>
+        </div>
+        <span class="text-base font-medium">About Us</span>
+      </a>
+      <a href="/login_user"
+        class="block text-center mt-4 bg-blue-600 text-white py-2.5 rounded-full font-semibold shadow hover:bg-blue-700 hover:scale-105 transition">
+        <i class="fas fa-arrow-right-to-bracket mr-1"></i> Join Now
+      </a>
+    </div>
+  </nav>
+</div>
+
+  <!-- ✅ MAIN CONTENT -->
+  <div class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen pt-32 pb-24 lg:pt-52 lg:pb-32 px-4 md:px-8 lg:px-24">
+    <section class="flex justify-center items-center">
+      <div class="flex flex-col lg:flex-row items-center justify-center gap-12 w-full max-w-6xl">
+
+      <!-- Left Text Block -->
+      <div class="w-full lg:w-2/5 px-4 lg:px-0 flex flex-col justify-center space-y-6">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 text-sm font-semibold px-5 py-3 rounded-full shadow-md">
+          <span class="animate-pulse">
+            <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C11.45 2 11 2.45 11 3V5C11 5.55 11.45 6 12 6C12.55 6 13 5.55 13 5V3C13 2.45 12.55 2 12 2Z..." />
+            </svg>
+          </span>   
+          <span class="tracking-wide">Empowering India's Workforce</span>
+        </div>
+
+        <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-800 leading-snug">
+          Build Connections <br class="hidden lg:block" />
+          That <span class="text-blue-600">Actually Work</span>
+        </h1>
+        <p class="text-gray-600 text-base lg:text-lg">
+          ShramSetu helps skilled laborers and employers find each other faster and easier. Zero commission, maximum opportunity.
+        </p>
+
+        <div class="grid grid-cols-2 gap-4 mt-6 text-sm text-gray-800">
+          <div class="flex items-center gap-3 bg-blue-50 border border-blue-200 shadow-lg px-4 py-3 rounded-lg">
+            <div class="bg-blue-100 p-2 rounded-full">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <span class="font-medium">No middlemen</span>
+          </div>
+          <div class="flex items-center gap-3 bg-blue-50 border border-blue-200 shadow-lg px-4 py-3 rounded-lg">
+            <div class="bg-blue-100 p-2 rounded-full">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <span class="font-medium">Fast job matching</span>
+          </div>
+          <div class="flex items-center gap-3 bg-blue-50 border border-blue-200 shadow-lg px-4 py-3 rounded-lg">
+            <div class="bg-blue-100 p-2 rounded-full">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <span class="font-medium">Realtime alerts</span>
+          </div>
+          <div class="flex items-center gap-3 bg-blue-50 border border-blue-200 shadow-lg px-4 py-3 rounded-lg">
+            <div class="bg-blue-100 p-2 rounded-full">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <span class="font-medium">Secure identity</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Login Box -->
+      <div class="w-full lg:w-1/2 bg-white shadow-lg rounded-xl p-8 md:p-10 max-w-md mx-auto lg:mx-0">
+        <h2 class="text-2xl font-bold text-gray-800 mb-3 text-center">Welcome Back</h2>
+        <p class="text-gray-500 mb-6 text-sm text-center">Login to continue exploring ShramSetu</p>
+
+        <form method="post" action="/login_user" class="space-y-5">
+          <div>
+            <label for="login-id" class="block mb-1 text-sm font-medium text-gray-600">Mobile Number</label>
+            <input type="text" id="login-id" name="mobile" placeholder="Enter mobile number" required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+          </div>
+
+          <div>
+            <label for="password" class="block mb-1 text-sm font-medium text-gray-600">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="flex items-center">
+              <input type="checkbox" name="remember-me" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+              <span class="ml-2 text-sm text-gray-700">Remember me</span>
+            </label>
+            <a href="/forgetPassword" class="text-sm text-blue-600 hover:underline font-medium">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold shadow">
+            Login
+          </button>
+        </form>
+
+        <p class="text-sm text-gray-500 mt-6 text-center">
+          Don’t have an account?
+          <a href="/signup_user" class="text-blue-600 hover:underline font-medium">Create one</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+</div>
+</body>
+</html>

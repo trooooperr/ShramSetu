@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShramSetu | Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary {
+      background: linear-gradient(to right, #3b82f6, #2563eb);
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+    }
+    input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+      outline: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-100 to-white">
+
+<!-- ✅ Alpine Wrapper -->
+<div x-data="{ open: false }">
+  <!-- ✅ Navbar -->
+  <nav class="bg-[#cceaff] shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="/" class="text-3xl font-bold text-blue-700">ShramSetu</a>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="#whyShramSetu" class="text-gray-700 font-semibold hover:text-blue-600">Why ShramSetu</a>
+          <a href="/hire" class="text-gray-700 font-semibold hover:text-blue-600">Hire ShramSevik</a>
+          <a href="/work" class="text-gray-700 font-semibold hover:text-blue-600">Find Work</a>
+          <a href="#categories" class="text-gray-700 font-semibold hover:text-blue-600">Categories</a>
+          <a href="/landingpage#benefits" class="text-gray-700 font-semibold hover:text-blue-600">Benefits</a>
+          <a href="/login_user" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-semibold">Join</a>
+        </div>
+        <div class="md:hidden">
+          <button @click="open = !open" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-700 hover:bg-blue-100">
+            <svg x-show="!open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg x-show="open" x-cloak class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div x-show="open" x-transition x-cloak @click.away="open = false" class="md:hidden fixed top-16 left-0 right-0 w-full bg-[#cceaff] px-6 py-4 space-y-3 rounded-b-3xl shadow-md z-40">
+      <a href="#whyShramSetu" class="flex items-center gap-2 p-2 rounded-xl hover:bg-blue-200 shadow">
+        <div class="w-9 h-9 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <span class="text-base font-medium">Why ShramSetu</span>
+      </a>
+      <a href="/hire" class="flex items-center gap-2 p-2 rounded-xl hover:bg-green-100 shadow">
+        <div class="w-9 h-9 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <span class="text-base font-medium">Hire ShramSevik</span>
+      </a>
+      <a href="/work" class="flex items-center gap-2 p-2 rounded-xl hover:bg-indigo-100 shadow">
+        <div class="w-9 h-9 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-hammer"></i>
+        </div>
+        <span class="text-base font-medium">Find Work</span>
+      </a>
+      <a href="#categories" class="flex items-center gap-2 p-2 rounded-xl hover:bg-sky-100 shadow">
+        <div class="w-9 h-9 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-th-large"></i>
+        </div>
+        <span class="text-base font-medium">Categories</span>
+      </a>
+      <a href="/about" class="flex items-center gap-2 p-2 rounded-xl hover:bg-pink-100 shadow">
+        <div class="w-9 h-9 bg-pink-100 text-pink-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-users"></i>
+        </div>
+        <span class="text-base font-medium">About Us</span>
+      </a>
+      <a href="/login_user" class="block text-center mt-4 bg-blue-600 text-white py-2.5 rounded-full font-semibold shadow hover:bg-blue-700 hover:scale-105 transition">
+        <i class="fas fa-arrow-right-to-bracket mr-1"></i> Join Now
+      </a>
+    </div>
+  </nav>
+</div>
+
+<section class="flex justify-center items-center min-h-[calc(100vh-80px)] px-4 md:px-8 lg:px-36 pt-24 pb-24">
+  <div class="flex flex-col lg:flex-row items-center justify-center gap-12 w-full max-w-6xl">
+    <div class="hidden lg:flex w-full lg:w-2/5 px-4 lg:px-0 flex-col justify-center space-y-6 mt-10">
+      <div class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 text-sm font-semibold px-5 py-3 rounded-full shadow-md">
+        <span class="animate-pulse">
+          <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C11.45 2 11 2.45 11 3V5C11 5.55 11.45 6 12 6C12.55 6 13 5.55 13 5V3C13 2.45 12.55 2 12 2Z..." />
+          </svg>
+        </span>
+        <span class="tracking-wide">Empowering India's Workforce</span>
+      </div>
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-800 leading-snug">
+        Start Your Journey<br class="hidden lg:block" />
+        With <span class="text-blue-600">ShramSetu</span>
+      </h1>
+      <p class="text-gray-600 text-base lg:text-lg">
+        Sign up today and connect with thousands of jobs and workers without any middlemen.
+      </p>
+              <div class="grid grid-cols-2 gap-4 mt-6 text-sm text-gray-800">
+          <div class="flex items-center gap-3 bg-blue-50 border border-blue-200 shadow-lg px-4 py-3 rounded-lg">
+            <div class="bg-blue-100 p-2 rounded-full">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <span class="font-medium">No middlemen</span>
+          </div>
+          <div class="flex items-center gap-3 bg-blue-50 border border-blue-200 shadow-lg px-4 py-3 rounded-lg">
+            <div class="bg-blue-100 p-2 rounded-full">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <span class="font-medium">Fast job matching</span>
+          </div>
+          <div class="flex items-center gap-3 bg-blue-50 border border-blue-200 shadow-lg px-4 py-3 rounded-lg">
+            <div class="bg-blue-100 p-2 rounded-full">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <span class="font-medium">Realtime alerts</span>
+          </div>
+          <div class="flex items-center gap-3 bg-blue-50 border border-blue-200 shadow-lg px-4 py-3 rounded-lg">
+            <div class="bg-blue-100 p-2 rounded-full">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <span class="font-medium">Secure identity</span>
+          </div>
+        </div>
+    </div>
+
+    <div class="w-full lg:w-1/2 bg-white shadow-lg rounded-xl p-6 md:p-8 max-w-md mx-auto lg:mx-0 mt-10">
+      <h2 class="text-2xl font-bold text-gray-800 mb-3 text-center">Create Account</h2>
+      <p class="text-gray-500 mb-6 text-sm text-center">Sign up to get started with ShramSetu</p>
+      <form action="/signup_user" method="post" class="space-y-4">
+        <div>
+          <label for="name" class="block mb-1 text-sm font-medium text-gray-600">Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="email" class="block mb-1 text-sm font-medium text-gray-600">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="signup-id" class="block mb-1 text-sm font-medium text-gray-600">Mobile Number</label>
+          <input type="text" id="signup-id" name="mobile" placeholder="Enter your mobile number" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="signup-password" class="block mb-1 text-sm font-medium text-gray-600">Password</label>
+          <input type="password" id="signup-password" name="password" placeholder="Create password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label for="confirm-password" class="block mb-1 text-sm font-medium text-gray-600">Confirm Password</label>
+          <input type="password" id="confirm-password" name="confirm_password" placeholder="Re-enter password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+      <p class="text-sm text-gray-500 mt-6 text-center">
+        Already have an account?
+        <a href="/login_user" class="text-blue-600 hover:underline font-medium">Login</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
+  

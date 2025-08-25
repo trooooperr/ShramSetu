@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShramSetu | Empowering Connections</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- SwiperJS for Carousel -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  <!-- AOS Animations -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+
+
+  <!-- Alpine.js for interactivity -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+  
+  <!-- Sttyling -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+.some-specific-class {
+  overflow: hidden;
+}
+
+    .communitySwiper {
+      overflow: hidden;
+      touch-action: pan-y;
+      cursor: grab;
+    }
+    .communitySwiper .swiper-slide {
+      cursor: grab;
+    }
+    
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-inter overflow-x-hidden">
+  <!-- NAVIGATION SECTION -->
+
+
+<!-- ✅ Alpine Wrapper -->
+<div x-data="{ open: false }">
+  <!-- ✅ Navbar -->
+  <nav class="bg-[#e6f4ff] shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between py-3 items-center">
+
+        <!-- Logo -->
+        <a href="/" class="text-2xl font-bold text-blue-700 hover:text-blue-800 transition">
+          ShramSetu
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center space-x-5">
+          <a href="#whyShramSetu" class="text-gray-700 font-semibold hover:text-blue-600 transition">Why ShramSetu</a>
+          <a href="/hire" class="text-gray-700 font-semibold hover:text-blue-600 transition">Hire ShramSevik</a>
+          <a href="/work" class="text-gray-700 font-semibold hover:text-blue-600 transition">Find Work</a>
+          <a href="#categories" class="text-gray-700 font-semibold hover:text-blue-600 transition">Categories</a>
+          <a href="#benefits" class="text-gray-700 font-semibold hover:text-blue-600 transition">Benefits</a>
+          <a href="#contact" class="text-gray-700 font-semibold hover:text-blue-600 transition">Contact Us</a>
+          <a href="/login_user" class="bg-blue-600 text-white px-4 py-1.5 rounded-md font-semibold hover:bg-blue-700 transition">
+            Join
+          </a>
+        </div>
+
+        <!-- Hamburger Icon -->
+        <div class="lg:hidden flex items-center">
+          <button @click="open = !open" type="button"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-800 hover:bg-blue-100 focus:outline-none transition">
+            <!-- Hamburger -->
+            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <!-- Close -->
+            <svg x-show="open" x-cloak xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ✅ Mobile Menu -->
+    <div x-show="open" x-cloak @click.away="open = false"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 scale-95"
+      x-transition:enter-end="opacity-100 scale-100"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100 scale-100"
+      x-transition:leave-end="opacity-0 scale-95"
+      class="lg:hidden fixed top-16 left-0 right-0 w-full z-40 bg-[#e6f4ff] shadow-xl px-5 py-4 space-y-3 rounded-b-3xl">
+
+      <!-- Mobile Links -->
+      <a href="#whyShramSetu" class="flex items-center gap-3 p-2 rounded-xl hover:bg-blue-100 transition shadow-sm">
+        <div class="w-9 h-9 bg-blue-200 text-blue-800 rounded-full flex items-center justify-center shadow">
+          <i class="fas fa-lightbulb text-sm"></i>
+        </div>
+        <span class="text-base font-medium text-gray-800">Why ShramSetu</span>
+      </a>
+
+      <a href="/hire" class="flex items-center gap-3 p-2 rounded-xl hover:bg-green-100 transition shadow-sm">
+        <div class="w-9 h-9 bg-green-200 text-green-800 rounded-full flex items-center justify-center shadow">
+          <i class="fas fa-user-tie text-sm"></i>
+        </div>
+        <span class="text-base font-medium text-gray-800">Hire ShramSevik</span>
+      </a>
+
+      <a href="/work" class="flex items-center gap-3 p-2 rounded-xl hover:bg-indigo-100 transition shadow-sm">
+        <div class="w-9 h-9 bg-indigo-200 text-indigo-800 rounded-full flex items-center justify-center shadow">
+          <i class="fas fa-hammer text-sm"></i>
+        </div>
+        <span class="text-base font-medium text-gray-800">Find Work</span>
+      </a>
+
+      <a href="#categories" class="flex items-center gap-3 p-2 rounded-xl hover:bg-sky-100 transition shadow-sm">
+        <div class="w-9 h-9 bg-sky-200 text-sky-800 rounded-full flex items-center justify-center shadow">
+          <i class="fas fa-th-large text-sm"></i>
+        </div>
+        <span class="text-base font-medium text-gray-800">Categories</span>
+      </a>
+
+      <a href="#benefits" class="flex items-center gap-3 p-2 rounded-xl hover:bg-yellow-100 transition shadow-sm">
+        <div class="w-9 h-9 bg-yellow-200 text-yellow-800 rounded-full flex items-center justify-center shadow">
+          <i class="fas fa-star text-sm"></i>
+        </div>
+        <span class="text-base font-medium text-gray-800">Benefits</span>
+      </a>
+
+      <a href="#contact" class="flex items-center gap-3 p-2 rounded-xl hover:bg-pink-100 transition shadow-sm">
+        <div class="w-9 h-9 bg-pink-200 text-pink-800 rounded-full flex items-center justify-center shadow">
+          <i class="fas fa-users text-sm"></i>
+        </div>
+        <span class="text-base font-medium text-gray-800">Contact Us</span>
+      </a>
+
+      <a href="/login_user"
+        class="block text-center mt-2 bg-blue-600 text-white py-2.5 rounded-full text-base font-bold shadow-md hover:bg-blue-700 hover:scale-105 transition">
+        <i class="fas fa-arrow-right-to-bracket mr-2"></i> Join Now
+      </a>
+    </div>
+  </nav>
+</div>
+
+<!-- HEADER SECTION -->
+<header class="relative min-h-screen bg-blue-50 flex items-center overflow-hidden pt-28 sm:pt-24">
+  <!-- 🌆 Main Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="/images/bg1.jpg"
+      alt="Background"
+      class="w-full h-full object-cover object-center"
+    />
+    <div class="absolute inset-0 bg-white/10"></div>
+  </div>
+
+
+ <!-- 👷 Worker Image Overlay (hidden on mobile) -->
+<img
+  src="/images/nobgworker.png"
+  alt="Worker holding phone"
+  class="absolute bottom-0 right-0 z-10
+         hidden md:block
+
+         md:h-[800px]
+         lg:h-[900px]
+         xl:h-[900px]
+         2xl:h-[1000px]
+         object-bottom pointer-events-none"
+/>
+
+  <!-- 🌟 Foreground Content -->
+  <div class="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 sm:py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center text-gray-900">
+    
+    <!-- LEFT SECTION -->
+    <div class="space-y-8 sm:space-y-10">
+      <!-- Heading -->
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-md">
+        Empowering Skilled Labor & Employers — Instantly.
+      </h1>
+
+      <!-- Paragraph -->
+      <p class="text-base sm:text-lg text-gray-800 font-medium max-w-xl">
+        ShramSetu bridges the gap between local skilled workers and job opportunities — fairly, quickly, and without middlemen.
+      </p>
+
+      <!-- Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
+        <a href="/hire" class="w-full sm:w-auto">
+          <button class="w-full sm:w-auto bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-full shadow-md hover:scale-105 transition duration-300 font-semibold flex items-center justify-center gap-2 text-sm sm:text-base">
+            <i class="fas fa-user-tie text-base sm:text-lg"></i> Hire a Worker
+          </button>
+        </a>
+        <a href="/work" class="w-full sm:w-auto">
+          <button class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full shadow-md hover:scale-105 transition duration-300 font-semibold flex items-center justify-center gap-2 text-sm sm:text-base">
+            <i class="fas fa-hammer text-base sm:text-lg"></i> Find Work
+          </button>
+        </a>
+      </div>
+
+      <!-- Features -->
+      <div class="space-y-6">
+        <!-- Feature 1 -->
+        <div class="flex items-start gap-4">
+          <div class="min-w-[3rem] min-h-[3rem] bg-green-100 text-green-700 rounded-full flex items-center justify-center text-lg sm:text-xl shadow-inner">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-1">Direct Contact</h4>
+            <p class="text-gray-700 text-sm sm:text-base">No middlemen or commissions. Employers connect directly with laborers.</p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="flex items-start gap-4">
+          <div class="min-w-[3rem] min-h-[3rem] bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-lg sm:text-xl shadow-inner">
+            <i class="fas fa-stopwatch"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-1">Fast Matching</h4>
+            <p class="text-gray-700 text-sm sm:text-base">Get connected to a verified match within 20 minutes.</p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="flex items-start gap-4">
+          <div class="min-w-[3rem] min-h-[3rem] bg-purple-100 text-purple-700 rounded-full flex items-center justify-center text-lg sm:text-xl shadow-inner">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-1">Hyperlocal Reach</h4>
+            <p class="text-gray-700 text-sm sm:text-base">ShramSetu works in your neighborhood — where you need it most.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SECTION (empty placeholder) -->
+    <div class="hidden md:block"></div>
+  </div>
+</header>
+
+<!-- HOW SHRAMSETU WORK SECTON -->
+<section id="howItWork" class="py-20 bg-gradient-to-br from-[#0f1c2e] via-[#152d47] to-[#1f3d5c] text-white relative">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+      How <span class="text-green-400">ShramSetu</span> Works
+    </h2>
+    <p class="text-lg text-gray-300 mb-12">
+      Whether you're a worker or an employer, here's how ShramSetu simplifies your journey.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-8 text-left">
+
+      <!-- I Want to Hire -->
+      <div class="bg-gradient-to-tr from-[#1c3a5a] to-[#224a72] rounded-2xl p-8 border border-blue-900 shadow-xl hover:shadow-2xl transition duration-300 h-full flex flex-col justify-between">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="w-16 aspect-square rounded-full bg-green-300 text-green-900 text-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div>
+            <div class="flex justify-center mb-6">
+           <h3 class="text-xl font-bold text-white">I Want to Hire</h3>
+           </div>
+            <p class="text-blue-100 text-base text-center">
+              Post your job in seconds. ShramSetu connects you directly with verified, skilled workers in your area. No middlemen, no delays.
+            </p>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <a href="/howToHire" class="inline-block px-5 py-2 text-sm font-semibold rounded-full bg-green-400 text-blue-900 hover:bg-green-300 transition duration-300">
+            Learn How to Hire <i class="fas fa-arrow-right ml-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- I Want to Work -->
+      <div class="bg-gradient-to-tr from-[#1c3a5a] to-[#224a72] rounded-2xl p-8 border border-blue-900 shadow-xl hover:shadow-2xl transition duration-300 h-full flex flex-col justify-between">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="w-16 aspect-square rounded-full bg-blue-300 text-blue-900 text-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+            <i class="fas fa-hard-hat"></i>
+          </div>
+          <div>
+            <div class="flex justify-center mb-6">
+            <h3 class="text-xl font-bold text-white">I Want to Work</h3>
+            </div>
+            <p class="text-blue-100 text-base text-center">
+              Browse nearby job listings, apply instantly, and get hired directly. ShramSetu empowers you with visibility and freedom.
+            </p>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <a href="/howToWork" class="inline-block px-5 py-2 text-sm font-semibold rounded-full bg-blue-400 text-blue-900 hover:bg-blue-300 transition duration-300">
+            Learn How to Work <i class="fas fa-arrow-right ml-1"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY SHRAMSETU  SECTION-->
+
+<section id="whyShramSetu" class="py-20 bg-gradient-to-b from-[#b3dbf2] via-white to-white relative overflow-hidden">
+  <!-- Soft Glow Background -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-blue-100 via-white to-green-100 opacity-50 blur-3xl rounded-3xl"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 text-center mb-12">
+    <h2 class="text-4xl md:text-5xl font-black text-gray-800 leading-snug tracking-wide mb-6">
+      Why <span class="text-blue-600">ShramSetu?</span>
+    </h2>
+    <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
+      ShramSetu isn’t just a platform—it’s a mission to empower millions. We seamlessly connect skilled workers with verified jobs through transparency, trust, and technology.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 max-w-7xl mx-auto">
+    <!-- Cards -->
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-blue-100 transition transform hover:scale-[1.03] hover:shadow-blue-200">
+      <div class="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-center text-blue-700 mb-2">Rapid Connection</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Instantly connect with verified workers nearby to reduce delay and increase efficiency.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-blue-100 transition transform hover:scale-[1.03] hover:shadow-blue-200">
+      <div class="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+        <i class="fas fa-map-marker-alt"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-center text-blue-700 mb-2">Localized Expertise</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Tap into a pool of experts from your local area for quick and familiar services.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-blue-100 transition transform hover:scale-[1.03] hover:shadow-blue-200">
+      <div class="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-center text-blue-700 mb-2">Verified and Reliable</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Hire with confidence knowing every worker is verified through our secure process.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-blue-100 transition transform hover:scale-[1.03] hover:shadow-blue-200">
+      <div class="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+        <i class="fas fa-comments"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-center text-blue-700 mb-2">Direct Communication</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Talk to workers directly to ensure clarity and transparency for your tasks.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-blue-100 transition transform hover:scale-[1.03] hover:shadow-blue-200">
+      <div class="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+        <i class="fas fa-mobile-alt"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-center text-blue-700 mb-2">User-Friendly Interface</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Navigate the platform with ease thanks to our intuitive design and flow.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-blue-100 transition transform hover:scale-[1.03] hover:shadow-blue-200">
+      <div class="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+        <i class="fas fa-users"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-center text-blue-700 mb-2">Community Empowerment</h3>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        Support and uplift local talent while creating job opportunities in your region.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY SECTION -->
+
+<section id="categories" class="py-16 bg-white w-screen">
+  <!-- Heading -->
+<div class="text-center mb-12 px-4 max-w-4xl mx-auto">
+  <h2 class="text-4xl font-extrabold text-gray-800 leading-tight">
+    Discover Our Most <span class="text-green-500">Popular Services</span>
+  </h2>
+<p class="text-lg text-gray-600 mt-4">
+  From expert electricians and plumbers to personal grooming and home services, ShramSetu brings verified professionals to your doorstep—quick, reliable, and hassle-free.
+</p>
+</div>
+
+  <!-- Scrollable Horizontal Cards with visible scrollbar -->
+  <div class="overflow-x-auto w-full whitespace-nowrap px-0" style="scrollbar-color: #ccc transparent;">
+    <div class="flex space-x-6 px-12 pb-4" style="min-width: max-content;">
+
+      <!-- CARD TEMPLATE -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/electrician.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">Electricians On-Demand</h3>
+          <p class="text-sm mb-4">From short circuits to switchboard</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/carpenter.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">Carpenters</h3>
+          <p class="text-sm mb-4">Furniture fix and fittings</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+       <!-- Card 3 -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/painter.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">Painting Services</h3>
+          <p class="text-sm mb-4">Interior and exterior painting</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/plumber.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">Plumbers Near You</h3>
+          <p class="text-sm mb-4">Repair leaks and pipes</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Card 5 -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/driver.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">Drivers</h3>
+          <p class="text-sm mb-4">On-demand driving help</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+       <!-- Card 6 -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/technician.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">Appliance Repair</h3>
+          <p class="text-sm mb-4">Fix ACs, fridges, more</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+       <!-- Card 7 -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/househelp.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">House Help</h3>
+          <p class="text-sm mb-4">Daily home assistance</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+       <!-- Card 8 -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/gardener.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">Gardening</h3>
+          <p class="text-sm mb-4">Lawn and garden care</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+       <!-- Card 9 -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/construction.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">Construction Work</h3>
+          <p class="text-sm mb-4">Brickwork and cement jobs</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+       <!-- Card 10 -->
+      <div class="flex-none w-72 h-96 rounded-2xl bg-cover bg-center relative shadow-xl overflow-hidden group"
+        style="background-image: url('/images/Category/welder.jpg');">
+        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition duration-300"></div>
+        <div class="relative z-10 text-white p-6 h-full flex flex-col justify-end">
+          <h3 class="text-xl font-bold mb-1">Welders & Fabricators</h3>
+          <p class="text-sm mb-4">Metal work and welding</p>
+          <button class="backdrop-blur-md border border-white/30 hover:bg-white/10 transition shadow-md px-4 py-2 rounded-lg font-semibold">
+            Hire Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Add more cards here if needed -->
+
+    </div>
+  </div>
+</section>
+
+<section id="benefits" class="py-20 bg-gradient-to-t from-[#b3dbf2] via-white to-white relative overflow-hidden">
+  <!-- Decorative Shape Blurs -->
+  <div class="absolute -top-24 -left-24 w-[280px] h-[280px] bg-blue-200 opacity-20 blur-3xl rounded-full z-0"></div>
+  <div class="absolute -bottom-36 -right-36 w-[320px] h-[320px] bg-green-200 opacity-20 blur-3xl rounded-full z-0"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <!-- Heading -->
+    <div class="text-center mb-16 px-2">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4 leading-tight">
+        Benefits of <span class="text-[#1976d2]">ShramSetu</span>
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Empowering both skilled workers and employers with smart, accessible and efficient solutions.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+      
+      <!-- Worker Card -->
+      <div class="bg-white border border-blue-100 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 p-6 sm:p-8 md:p-10">
+        <h3 class="text-2xl font-bold text-[#1976d2] text-center mb-6 border-b pb-2">For ShramSevik</h3>
+        <ul class="space-y-6 mt-4">
+          <!-- Item -->
+          <li class="flex gap-4 sm:gap-5 items-start">
+            <div class="w-16 h-16 sm:w-14 sm:h-14 bg-[#1976d2] text-white rounded-xl flex items-center justify-center text-2xl sm:text-xl shadow-md shrink-0">
+              <i class="fas fa-search"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Wider & Localized Job Access</h4>
+              <p class="text-gray-600 text-sm leading-relaxed">Find job opportunities tailored to your location and skills with ease.</p>
+            </div>
+          </li>
+          <!-- Repeat Items -->
+          <li class="flex gap-4 sm:gap-5 items-start">
+            <div class="w-16 h-16 sm:w-14 sm:h-14 bg-[#1976d2] text-white rounded-xl flex items-center justify-center text-2xl sm:text-xl shadow-md shrink-0">
+              <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Fair Pay & Transparent Hiring</h4>
+              <p class="text-gray-600 text-sm leading-relaxed">Negotiate your own rates and get hired for what you're worth.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 sm:gap-5 items-start">
+            <div class="w-16 h-16 sm:w-14 sm:h-14 bg-[#1976d2] text-white rounded-xl flex items-center justify-center text-2xl sm:text-xl shadow-md shrink-0">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Direct Employer Communication</h4>
+              <p class="text-gray-600 text-sm leading-relaxed">Speak directly with job providers to align on tasks and expectations.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 sm:gap-5 items-start">
+            <div class="w-16 h-16 sm:w-14 sm:h-14 bg-[#1976d2] text-white rounded-xl flex items-center justify-center text-2xl sm:text-xl shadow-md shrink-0">
+              <i class="fas fa-id-card"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Digital Profile & Work Tracker</h4>
+              <p class="text-gray-600 text-sm leading-relaxed">Build your professional profile and track applications seamlessly.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Employer Card -->
+      <div class="bg-white border border-blue-100 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 p-6 sm:p-8 md:p-10">
+        <h3 class="text-2xl font-bold text-[#1976d2] text-center mb-6 border-b pb-2">For Employers</h3>
+        <ul class="space-y-6 mt-4">
+          <li class="flex gap-4 sm:gap-5 items-start">
+            <div class="w-16 h-16 sm:w-14 sm:h-14 bg-[#1976d2] text-white rounded-xl flex items-center justify-center text-2xl sm:text-xl shadow-md shrink-0">
+              <i class="fas fa-users"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Skilled & Verified Labor Access</h4>
+              <p class="text-gray-600 text-sm leading-relaxed">Hire from a pool of authenticated and experienced workers.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 sm:gap-5 items-start">
+            <div class="w-16 h-16 sm:w-14 sm:h-14 bg-[#1976d2] text-white rounded-xl flex items-center justify-center text-2xl sm:text-xl shadow-md shrink-0">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Cost-Effective Hiring</h4>
+              <p class="text-gray-600 text-sm leading-relaxed">Hire laborers within your budget with full price transparency.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 sm:gap-5 items-start">
+            <div class="w-16 h-16 sm:w-14 sm:h-14 bg-[#1976d2] text-white rounded-xl flex items-center justify-center text-2xl sm:text-xl shadow-md shrink-0">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Quick Job Listings</h4>
+              <p class="text-gray-600 text-sm leading-relaxed">Post your job in minutes and receive instant applications.</p>
+            </div>
+          </li>
+          <li class="flex gap-4 sm:gap-5 items-start">
+            <div class="w-16 h-16 sm:w-14 sm:h-14 bg-[#1976d2] text-white rounded-xl flex items-center justify-center text-2xl sm:text-xl shadow-md shrink-0">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-800 mb-1">Direct Dealings & No Commissions</h4>
+              <p class="text-gray-600 text-sm leading-relaxed">Avoid middlemen and handle everything with your chosen worker.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- COMMUNITY REVIEW SECTION -->
+
+<section id="community" class="py-20 bg-gradient-to-br from-[#0f1c2e] via-[#152d47] to-[#1f3d5c] text-white relative">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+      Hear From Our <span class="text-green-400">Community</span>
+    </h2>
+    <p class="text-lg text-gray-300 mb-12">
+      Real voices from users who have transformed their work journey with ShramSetu.
+    </p>
+
+    <div class="relative overflow-hidden">
+      <!-- Swiper -->
+      <div class="swiper communitySwiper !overflow-hidden">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-tr from-[#1c3a5a] to-[#224a72] rounded-2xl p-6 border border-blue-900 shadow-xl h-full text-left">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-14 h-14 rounded-full border-2 border-green-300 shadow object-cover" />
+                <div>
+                  <h4 class="text-xl font-bold text-white">Ravi Kumar</h4>
+                  <p class="text-sm text-blue-100">Electrician, Lucknow</p>
+                </div>
+              </div>
+              <p class="text-blue-100 text-sm">“With ShramSetu, getting more jobs in my area. I now work with 4–5 clients daily and earn regularly!”</p>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-tr from-[#1c3a5a] to-[#224a72] rounded-2xl p-6 border border-blue-900 shadow-xl h-full text-left">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-14 h-14 rounded-full border-2 border-blue-300 shadow object-cover" />
+                <div>
+                  <h4 class="text-xl font-bold text-white">Meena Devi</h4>
+                  <p class="text-sm text-blue-100">Construction Worker, Kanpur</p>
+                </div>
+              </div>
+              <p class="text-blue-100 text-sm">“It’s easy to find work now. No middlemen. I apply for jobs and get direct calls from house owners.”</p>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-tr from-[#1c3a5a] to-[#224a72] rounded-2xl p-6 border border-blue-900 shadow-xl h-full text-left">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="User" class="w-14 h-14 rounded-full border-2 border-purple-300 shadow object-cover" />
+                <div>
+                  <h4 class="text-xl font-bold text-white">Ramesh Singh</h4>
+                  <p class="text-sm text-blue-100">Home Owner, Varanasi</p>
+                </div>
+              </div>
+              <p class="text-blue-100 text-sm">“ShramSetu saved me time & money. I found a plumber in 10 minutes — no app fee, no wait.”</p>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-tr from-[#1c3a5a] to-[#224a72] rounded-2xl p-6 border border-blue-900 shadow-xl h-full text-left">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User" class="w-14 h-14 rounded-full border-2 border-yellow-300 shadow object-cover" />
+                <div>
+                  <h4 class="text-xl font-bold text-white">Sunil Verma</h4>
+                  <p class="text-sm text-blue-100">Carpenter, Allahabad</p>
+                </div>
+              </div>
+              <p class="text-blue-100 text-sm">“Thanks to ShramSetu, I’ve been able to expand my client base beyond expectations.”</p>
+            </div>
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="swiper-slide">
+            <div class="bg-gradient-to-tr from-[#1c3a5a] to-[#224a72] rounded-2xl p-6 border border-blue-900 shadow-xl h-full text-left">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="https://randomuser.me/api/portraits/women/66.jpg" alt="User" class="w-14 h-14 rounded-full border-2 border-pink-300 shadow object-cover" />
+                <div>
+                  <h4 class="text-xl font-bold text-white">Sita Yadav</h4>
+                  <p class="text-sm text-blue-100">Tailor, Ghaziabad</p>
+                </div>
+              </div>
+              <p class="text-blue-100 text-sm">“Now I get direct orders and manage my own schedule with freedom. It’s amazing!”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Dots -->
+    <div class="mt-10 flex justify-center">
+      <div class="swiper-pagination community-pagination !relative !bottom-0 !mt-0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+
+<section id="contact" class="relative bg-[#e6f4ff] py-20 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+
+      <!-- Text Side -->
+      <div class="space-y-6">
+        <h2 class="text-4xl font-extrabold text-blue-800">Let’s Start a Conversation</h2>
+        <p class="text-gray-800 text-lg leading-relaxed">
+          Whether you're a user in need of reliable services, a skilled worker seeking opportunities, or a business partner looking to collaborate — we’re excited to hear from you.
+        </p>
+        <p class="text-gray-700">
+          Fill out the form and we’ll get back to you as soon as possible. Let’s build a better, connected workforce together.
+        </p>
+        <div class="mt-6">
+          <a href="#footer" class="inline-block text-blue-700 font-semibold hover:no-underline">
+            Or scroll down for our contact details <i class="fas fa-arrow-down ml-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Form Side -->
+      <div class="bg-white/90 backdrop-blur-md rounded-3xl shadow-xl p-8 border border-blue-100">
+        <form class="space-y-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-800">Full Name</label>
+            <input type="text" id="name" placeholder="John Doe" class="mt-1 w-full px-4 py-3 rounded-xl border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-800" />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-800">Email Address</label>
+            <input type="email" id="email" placeholder="you@example.com" class="mt-1 w-full px-4 py-3 rounded-xl border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-800" />
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-800">Your Message</label>
+            <textarea id="message" rows="5" placeholder="Type your message here..." class="mt-1 w-full px-4 py-3 rounded-xl border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-800"></textarea>
+          </div>
+
+          <div>
+            <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl shadow-md hover:bg-blue-700 hover:scale-105 transition-transform duration-300">
+              Send Message
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER SECTION -->
+
+<footer class="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 py-16">
+  <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center md:text-left">
+      
+      <!-- Column 1 -->
+      <div>
+        <h4 class="text-2xl font-bold text-white mb-3">ShramSetu</h4>
+        <p class="text-sm leading-relaxed">
+          Empowering skilled laborers by directly connecting them with real job opportunities—without middlemen.
+        </p>
+        <p class="mt-6 text-xs text-gray-400">&copy; 2025 ShramSetu. All rights reserved.</p>
+      </div>
+
+      <!-- Column 2 -->
+      <div>
+        <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#whyShramSetu" class="hover:text-white transition">Why ShramSetu</a></li>
+          <li><a href="#howItWork" class="hover:text-white transition">How It Works</a></li>
+          <li><a href="#categories" class="hover:text-white transition">Categories</a></li>
+          <li><a href="/benefits" class="hover:text-white transition">Benefits</a></li>
+          <li><a href="/about" class="hover:text-white transition">About Us</a></li>
+          <li><a href="#contact" class="hover:text-white transition">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3 -->
+      <div>
+        <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/legal" class="hover:text-white transition">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
+          <li><a href="/disclaimer" class="hover:text-white transition">Disclaimer</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4 -->
+      <div>
+        <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+        <div class="flex justify-center md:justify-start space-x-4">
+          <a href="#" class="hover:text-blue-400 transition"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#" class="hover:text-blue-300 transition"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="https://www.linkedin.com/company/shramsetu" class="hover:text-blue-500 transition"><i class="fab fa-linkedin fa-lg"></i></a>
+          <a href="#" class="hover:text-pink-400 transition"><i class="fab fa-instagram fa-lg"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Note -->
+    <div class="mt-12 text-center text-sm text-gray-400 px-4">
+      <p>ShramSetu — Bridging Skilled Talent & Opportunity Across India 🇮🇳</p>
+      <p>Crafted with ❤️ by the ShramSetu Team</p>
+    </div>
+  </div>
+</footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('hamburger-icon');
+
+      toggle?.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        if (icon.classList.contains('fa-bars')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+    });
+    
+  const communitySwiper = new Swiper(".communitySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    loop: true,
+    grabCursor: true,
+    simulateTouch: true,
+    allowTouchMove: true,
+    touchStartPreventDefault: false,
+    touchReleaseOnEdges: true,
+    pagination: {
+      el: ".community-pagination",
+      clickable: true
+    },
+    breakpoints: {
+      0:   { slidesPerView: 1.2 },
+      640: { slidesPerView: 1.5 },
+      768: { slidesPerView: 2 },
+      1024:{ slidesPerView: 3 }
+    }
+});
+
+
+    AOS.init();
+  </script>
+</body>
+</html>

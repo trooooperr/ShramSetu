@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ open: false }">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShramSetu | Get Started as Worker</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          },
+          colors: {
+            primary: '#1976D2',
+            primaryDark: '#1565C0',
+            bgLight: '#F0F4FA'
+          },
+          boxShadow: {
+            card: '0 4px 14px rgba(21, 101, 192, 0.15)',
+            cardHover: '0 12px 24px rgba(21, 101, 192, 0.25)'
+          },
+          spacing: {
+            18: '4.5rem'
+          },
+          fontSize: {
+            basePlus: '1.05rem'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .icon-circle {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #1565C0, #1976D2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      color: white;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .icon-circle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px rgba(25, 118, 210, 0.5);
+    }
+
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body class="bg-bgLight text-gray-800" x-data>
+
+<!-- ✅ Navbar -->
+<nav class="bg-[#cceaff] shadow-md fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+
+      <!-- Logo -->
+      <a href="/" class="text-3xl font-bold text-blue-700 hover:no-underline">ShramSetu</a>
+
+      <!-- Desktop Menu (visible only on lg and above) -->
+      <div class="hidden lg:flex items-center space-x-6">
+        <a href="#whyShramSetu" class="text-gray-700 font-semibold hover:text-blue-600">Why ShramSetu</a>
+        <a href="/hire" class="text-gray-700 font-semibold hover:text-blue-600">Hire ShramSevik</a>
+        <a href="/work" class="text-gray-700 font-semibold hover:text-blue-600">Find Work</a>
+        <a href="#categories" class="text-gray-700 font-semibold hover:text-blue-600">Categories</a>
+        <a href="/landingpage#benefits" class="text-gray-700 font-semibold hover:text-blue-600">Benefits</a>
+        <a href="/login_user" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-semibold">
+          Join
+        </a>
+      </div>
+
+      <!-- Hamburger Icon (visible below lg) -->
+      <div class="lg:hidden">
+        <button @click="open = !open" type="button"
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-700 hover:bg-blue-100">
+          <svg x-show="!open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg x-show="open" x-cloak class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📱 Mobile Drawer -->
+  <div x-show="open" x-transition x-cloak
+    @click.away="open = false"
+    class="lg:hidden fixed top-16 left-0 right-0 w-full bg-[#cceaff] px-6 py-4 space-y-3 rounded-b-3xl shadow-md z-40">
+    <a href="#whyShramSetu" class="flex items-center gap-2 p-2 rounded-xl hover:bg-blue-200 shadow">
+      <div class="w-9 h-9 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <span class="text-base font-medium">Why ShramSetu</span>
+    </a>
+    <a href="/hire" class="flex items-center gap-2 p-2 rounded-xl hover:bg-green-100 shadow">
+      <div class="w-9 h-9 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
+        <i class="fas fa-user-tie"></i>
+      </div>
+      <span class="text-base font-medium">Hire ShramSevik</span>
+    </a>
+    <a href="/work" class="flex items-center gap-2 p-2 rounded-xl hover:bg-indigo-100 shadow">
+      <div class="w-9 h-9 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center">
+        <i class="fas fa-hammer"></i>
+      </div>
+      <span class="text-base font-medium">Find Work</span>
+    </a>
+    <a href="#categories" class="flex items-center gap-2 p-2 rounded-xl hover:bg-sky-100 shadow">
+      <div class="w-9 h-9 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center">
+        <i class="fas fa-th-large"></i>
+      </div>
+      <span class="text-base font-medium">Categories</span>
+    </a>
+    <a href="/about" class="flex items-center gap-2 p-2 rounded-xl hover:bg-pink-100 shadow">
+      <div class="w-9 h-9 bg-pink-100 text-pink-700 rounded-full flex items-center justify-center">
+        <i class="fas fa-users"></i>
+      </div>
+      <span class="text-base font-medium">About Us</span>
+    </a>
+    <a href="/login_user"
+      class="block text-center mt-4 bg-blue-600 text-white py-2.5 rounded-full font-semibold shadow hover:bg-blue-700 hover:scale-105 transition">
+      <i class="fas fa-arrow-right-to-bracket mr-1"></i> Join Now
+    </a>
+  </div>
+</nav>
+
+
+<!-- Hero Section -->
+<section class="pt-28 bg-gradient-to-r from-blue-800 to-blue-600 py-16 text-center shadow-xl">
+  <div class="max-w-3xl mx-auto px-4" data-aos="fade">
+    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 text-blue-100">Get Started as a Worker</h1>
+    <p class="text-lg sm:text-xl font-medium leading-relaxed text-blue-200">
+      A quick, clear guide to help you find and complete jobs effectively on ShramSetu.
+    </p>
+  </div>
+</section>
+
+
+<!-- Steps Section -->
+<!-- ✅ How to Work Steps Section -->
+<section class="bg-blue-50 py-20">
+  <main class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Step 1 -->
+      <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col justify-between h-[230px]" data-aos="fade-up">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-primaryDark text-white rounded-full flex items-center justify-center shadow-md text-lg">
+            <i class="fa fa-id-card"></i>
+          </div>
+          <h2 class="text-xl font-bold text-primary">1. Create Profile</h2>
+        </div>
+        <div class="text-[17px] text-gray-700 space-y-1 pl-2">
+          <p>Register with your phone number.</p>
+          <p>Add your skills, location & photo.</p>
+        </div>
+        <p class="text-sm italic text-primary font-semibold text-right mt-4">Make a strong impression.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col justify-between h-[230px]" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-primaryDark text-white rounded-full flex items-center justify-center shadow-md text-lg">
+            <i class="fa fa-briefcase"></i>
+          </div>
+          <h2 class="text-xl font-bold text-primary">2. Browse Jobs</h2>
+        </div>
+        <div class="text-[17px] text-gray-700 space-y-1 pl-2">
+          <p>View jobs based on your skill & location.</p>
+          <p>New jobs are added regularly.</p>
+        </div>
+        <p class="text-sm italic text-primary font-semibold text-right mt-4">Find your match.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col justify-between h-[230px]" data-aos="fade-up" data-aos-delay="200">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-primaryDark text-white rounded-full flex items-center justify-center shadow-md text-lg">
+            <i class="fa fa-handshake"></i>
+          </div>
+          <h2 class="text-xl font-bold text-primary">3. Apply with Bid</h2>
+        </div>
+        <div class="text-[17px] text-gray-700 space-y-1 pl-2">
+          <p>Place your price and time estimate.</p>
+          <p>Write a short message to the user.</p>
+        </div>
+        <p class="text-sm italic text-primary font-semibold text-right mt-4">Be fair and clear.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col justify-between h-[230px]" data-aos="fade-up" data-aos-delay="300">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-primaryDark text-white rounded-full flex items-center justify-center shadow-md text-lg">
+            <i class="fa fa-comments"></i>
+          </div>
+          <h2 class="text-xl font-bold text-primary">4. Communicate</h2>
+        </div>
+        <div class="text-[17px] text-gray-700 space-y-1 pl-2">
+          <p>Discuss job details with the user.</p>
+          <p>Clarify doubts before accepting.</p>
+        </div>
+        <p class="text-sm italic text-primary font-semibold text-right mt-4">Clear talk builds trust.</p>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col justify-between h-[230px]" data-aos="fade-up" data-aos-delay="400">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-primaryDark text-white rounded-full flex items-center justify-center shadow-md text-lg">
+            <i class="fa fa-tools"></i>
+          </div>
+          <h2 class="text-xl font-bold text-primary">5. Do the Work</h2>
+        </div>
+        <div class="text-[17px] text-gray-700 space-y-1 pl-2">
+          <p>Go to the location and start work.</p>
+          <p>Complete it professionally & on time.</p>
+        </div>
+        <p class="text-sm italic text-primary font-semibold text-right mt-4">Work speaks for you.</p>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col justify-between h-[230px]" data-aos="fade-up" data-aos-delay="500">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-primaryDark text-white rounded-full flex items-center justify-center shadow-md text-lg">
+            <i class="fa fa-star"></i>
+          </div>
+          <h2 class="text-xl font-bold text-primary">6. Get Rated</h2>
+        </div>
+        <div class="text-[17px] text-gray-700 space-y-1 pl-2">
+          <p>Receive reviews from users.</p>
+          <p>Higher ratings bring more jobs.</p>
+        </div>
+        <p class="text-sm italic text-primary font-semibold text-right mt-4">Good work = more offers.</p>
+      </div>
+
+    </div>
+  </main>
+</section>
+
+  <footer class="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 py-16">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center md:text-left">
+      <div>
+        <h4 class="text-2xl font-bold text-white mb-3">ShramSetu</h4>
+        <p class="text-sm">Empowering skilled laborers by connecting them directly to real jobs—no middlemen.</p>
+        <p class="mt-6 text-xs text-gray-400">&copy; 2025 ShramSetu. All rights reserved.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#whyShramSetu" class="hover:text-white">Why ShramSetu</a></li>
+          <li><a href="#howItWork" class="hover:text-white">How It Works</a></li>
+          <li><a href="#categories" class="hover:text-white">Categories</a></li>
+          <li><a href="/benefits" class="hover:text-white">Benefits</a></li>
+          <li><a href="/about" class="hover:text-white">About Us</a></li>
+          <li><a href="#contact" class="hover:text-white">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/privacy" class="hover:text-white">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-white">Terms of Service</a></li>
+          <li><a href="/disclaimer" class="hover:text-white">Disclaimer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+        <div class="flex justify-center md:justify-start space-x-4">
+          <a href="#" class="hover:text-blue-400"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#" class="hover:text-blue-300"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="https://www.linkedin.com/company/shramsetu" class="hover:text-blue-500"><i class="fab fa-linkedin fa-lg"></i></a>
+          <a href="#" class="hover:text-pink-400"><i class="fab fa-instagram fa-lg"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 text-center text-sm text-gray-400">
+      <p>ShramSetu — Bridging Skilled Talent & Opportunity Across India 🇮🇳</p>
+      <p>Crafted with ❤️ by the ShramSetu Team</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 900, once: true, delay: 100 });
+    
+  </script>
+</body>
+</html>
