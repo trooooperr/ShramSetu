@@ -246,8 +246,8 @@ app.post('/signup_user', async function(req, res) {
             let created = await usermodel.create({name,mobile,email,password: hash,latitude,longitude,formattedAddress});
 
             let token = jwt.sign({ _id: created._id, mobile, email }, 'wfhsoptbb');
-            res.cookie("token", token);
-            res.render("landingpage");
+            res.cookie("token", token, cookieOptions(req));
+            res.redirect("/");
         });
     });
 });
@@ -270,27 +270,11 @@ app.post('/signup_worker', profileupload.fields([
             intro = req.body.shortBio;
         }
 
-        let created = await workermodel.create({
-            name,
-            email,
-            mobile,
-            intro,
-            pincode,
-            job,
-            yearsExperience,
-            minimumpay,
-            doNotDisturbStart,
-            doNotDisturbEnd,
-            ifsc,
-            BankAccountNo,
-            profilepic,
-            identity
-        });
+        let created = await workermodel.create({name,email,mobile,intro,pincode,job,yearsExperience,minimumpay,doNotDisturbStart,doNotDisturbEnd,ifsc,BankAccountNo,profilepic,identity});
 
         let token = jwt.sign({ mobile }, 'wfhsoptbb');
-        res.cookie("token", token);
-        res.redirect('/');
-
+        res.cookie("token", token, cookieOptions(req));
+        res.redirect("/");
     } catch (error) {
         console.error("Worker Create Error →", error.message);
         res.status(500).json({ success: false, message: error.message });
@@ -312,8 +296,8 @@ app.post('/login_user',async function(req,res){
     bcrypt.compare(password, user.password, function(err, result) {
         if(result){
             let token = jwt.sign({_id:user._id , mobile:user.mobile},'wfhsoptbb');
-            res.cookie("token",token);
-            res.redirect('/');
+            res.cookie("token", token, cookieOptions(req));
+            res.redirect("/");
         }
         else res.send("Something is wrong");
     });
@@ -332,8 +316,8 @@ app.post('/login_worker',async function(req,res){
     bcrypt.compare(password, worker.password, function(err, result) {
         if(result){
             let token = jwt.sign({_id:worker._id , mobile},'wfhsoptbb');
-            res.cookie("token",token);
-            res.redirect('/')
+            res.cookie("token", token, cookieOptions(req));
+            res.redirect("/");
         }
         else res.send("Something is wrong");
     });
@@ -362,6 +346,18 @@ app.get('/profile', isLoggedIn, async function(req, res) {
     }
 });
 
+app.post('/mylocation', async (req, res) => {
+  const { latitude, longitude } = req.body;
+
+  try {
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+    const data = await response.json();
+
+    res.json({ formatted: data.display_name });
+  } catch (err) {
+    res.status(500).json({ formatted: 'Location fetch failed' });
+  }
+});
 
 function isLoggedIn(req, res, next) {
     const token = req.cookies?.token;
@@ -395,18 +391,26 @@ function isLoggedIn(req, res, next) {
     }
 }
 
-app.post('/mylocation', async (req, res) => {
-  const { latitude, longitude } = req.body;
 
-  try {
-    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-    const data = await response.json();
 
-    res.json({ formatted: data.display_name });
-  } catch (err) {
-    res.status(500).json({ formatted: 'Location fetch failed' });
+function cookieOptions(req) {
+  const isLocal = req.headers.host.includes("localhost");
+
+  if (isLocal) {
+    return {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax"
+    };
   }
-});
+
+  // For render.com https
+  return {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none"
+  };
+}
 
 app.listen(3000,function(){
     console.log('Shram setu started');
