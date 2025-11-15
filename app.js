@@ -1,417 +1,413 @@
-require("dotenv").config();
+require('dotenv').config();
 console.log("USE_LOCAL_DB:", process.env.USE_LOCAL_DB);
 
-const express = require("express");
+const express = require('express');
 const app = express();
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const cookieParser = require("cookie-parser");
-const path = require("path");
-const multer = require("multer");
-const crypto = require("crypto");
-const fetch = require("node-fetch");
-const mongoose = require("mongoose");
-const nodemailer = require("nodemailer");
-
-// ROUTES
-const companyRoutes = require("./routes/company");
-app.use("/company", companyRoutes);
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const cookieParser = require('cookie-parser');
+const path = require('path');
+const multer = require('multer');
+const crypto = require('crypto');
+const fetch = require('node-fetch');
+const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
 
 
-// DB CONNECTION
-const mongoUri =
-  process.env.USE_LOCAL_DB === "true"
-    ? process.env.LOCAL_MONGO_URI
-    : process.env.CLOUD_MONGO_URI;
+const companyRoutes = require('./routes/company');
+app.use('/company', companyRoutes);
+
+
+const mongoUri = process.env.USE_LOCAL_DB === 'true'
+  ? process.env.LOCAL_MONGO_URI
+  : process.env.CLOUD_MONGO_URI;
 
 if (!mongoUri) {
-  console.error("❌ No MongoDB URI provided.");
+  console.error(' No MongoDB URI provided.');
   process.exit(1);
 }
 
-mongoose
-  .connect(mongoUri)
-  .then(() =>
-    console.log(
-      `Database connected: ${
-        mongoUri.includes("localhost") ? "Local" : "Cloud"
-      }`
-    )
-  )
-  .catch((err) => console.error("❌ Database not connected:", err));
+mongoose.connect(mongoUri)
+  .then(() => console.log(`Database connected: ${mongoUri.includes('localhost') ? 'Local' : 'Cloud'}`))
+  .catch((err) => console.error(' Database not connected:', err));
 
-// EXPRESS CONFIG
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({extended:true}));
+app.use(express.static(path.join(__dirname,'public')));
 app.use(cookieParser());
-app.set("view engine", "ejs");
 
-// MODELS
-const usermodel = require("./models/user");
-const workermodel = require("./models/worker");
-const postmodel = require("./models/post");
-const feedbackmodel = require("./models/feedback");
+app.set('view engine','ejs');
 
-// -----------------------------------------------------------
-// PROFILE IMAGE UPLOAD
-// -----------------------------------------------------------
+const usermodel = require('./models/user');
+const workermodel = require('./models/worker');
+const postmodel = require('./models/post');
+const feedbackmodel = require('./models/feedback');
+const post = require('./models/post');
+
+
+
+
+//-----------------------Profile picture--------------------------------------
 const profilestorage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "./public/images/profileuploads"),
-  filename: (req, file, cb) => {
-    crypto.randomBytes(12, (err, bytes) => {
-      cb(null, bytes.toString("hex") + path.extname(file.originalname));
-    });
-  },
+    destination:function(req,file,cb){
+        cb(null,'./public/images/profileuploads')
+    },
+    filename: function(req,file,cb){
+        crypto.randomBytes(12,function(err,bytes){
+            const fn = bytes.toString("hex") + path.extname(file.originalname);
+            cb(null, fn);
+        })
+    }
 });
 
 const profileupload = multer({ storage: profilestorage });
+//-------------------------------------------------------------------------------
 
-// -----------------------------------------------------------
-// PROBLEM IMAGE UPLOAD
-// -----------------------------------------------------------
+//--------------------------Problem picture--------------------------------------
 const problemstorage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "./public/images/problemuploads"),
-  filename: (req, file, cb) => {
-    crypto.randomBytes(12, (err, bytes) => {
-      cb(null, bytes.toString("hex") + path.extname(file.originalname));
-    });
-  },
+    destination:function(req,file,cb){
+        cb(null,'./public/images/problemuploads')
+    },
+    filename: function(req,file,cb){
+        crypto.randomBytes(12,function(err,bytes){
+            const fn = bytes.toString("hex") + path.extname(file.originalname);
+            cb(null, fn);
+        })
+    }
 });
 
 const problemupload = multer({ storage: problemstorage });
+//------------------------------------------------------------------------------------
 
-// -----------------------------------------------------------
-// ROUTES
-// -----------------------------------------------------------
-app.get("/", (req, res) => res.render("landingpage"));
-app.get("/about", (req, res) => res.render("about"));
-app.get("/howToHire", (req, res) => res.render("howToHire"));
-app.get("/howToWork", (req, res) => res.render("howToWork"));
-
-// -----------------------------------------------------------
-// PASSWORD RESET
-// -----------------------------------------------------------
-app.get("/forgetPassword", (req, res) => res.render("forgetPassword"));
-
-app.post("/forgetPassword", async (req, res) => {
-  const { email } = req.body;
-  const user = await usermodel.findOne({ email });
-
-  if (!user) return res.status(404).send("User not found");
-
-  let token = jwt.sign({ email }, "wfhsoptbb");
-  user.resetToken = token;
-  user.resetTokenExpiry = Date.now() + 30 * 60 * 1000;
-  await user.save();
-
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "shramsetumailer@gmail.com",
-      pass: "ywopqtrsmrlogzcz",
-    },
-  });
-
-  const resetlink = `https://shram-setu.onrender.com/resetPassword?token=${token}`;
-
-  const mailoptions = {
-    from: '"Shram Setu" <shramsetumailer@gmail.com>',
-    to: email,
-    subject: "🔐 Reset your ShramSetu Password",
-    html: `
-      <p>Hello, ${user.name}</p>
-      <p>Click the link below to reset your password:</p>
-      <a href="${resetlink}">${resetlink}</a>
-      <p>This link will expire in 30 minutes.</p>
-    `,
-  };
-
-  transporter.sendMail(mailoptions, (error, info) => {
-    if (error) console.log("Error :", error);
-    else console.log("email sent :", info.response);
-  });
-
-  res.redirect("/");
+app.get('/',function(req,res){
+    res.render('landingpage');
 });
 
-app.get("/resetPassword", (req, res) => {
-  const { token } = req.query;
-  if (!token) return res.status(400).send("Missing token");
-  res.render("resetPassword", { token });
+app.get('/about',function(req,res){
+    res.render('about');
 });
 
-app.post("/resetPassword", async (req, res) => {
-  const { token, password, confirm_password } = req.body;
+app.get('/forgetPassword',function(req,res){
+    res.render('forgetPassword');
+});
 
-  if (!token) return res.status(400).send("Invalid or expired token");
-  if (password !== confirm_password)
-    return res.status(400).send("Passwords do not match");
+app.post('/forgetPassword',async function(req,res){
+    let {email,password}  = req.body;
+    const user = await usermodel.findOne({email});
 
-  try {
-    const decoded = jwt.verify(token, "wfhsoptbb");
-    const user = await usermodel.findOne({
-      email: decoded.email,
-      resetToken: token,
-      resetTokenExpiry: { $gt: Date.now() },
-    });
+    if (!user) return res.status(404).send("User not found");
 
-    if (!user) return res.status(400).send("Token expired or user not found");
-
-    user.password = await bcrypt.hash(password, 10);
-    user.resetToken = undefined;
-    user.resetTokenExpiry = undefined;
-
+    let token = jwt.sign({ email }, 'wfhsoptbb');
+    user.resetToken = token;
+    user.resetTokenExpiry = Date.now() + 30 * 60 * 1000; // Token valid for 30 minutes
     await user.save();
 
-    res.redirect("/login_user");
-  } catch (err) {
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-// -----------------------------------------------------------
-// SIGNUP / LOGIN
-// -----------------------------------------------------------
-app.get("/signup_user", (req, res) => res.render("signup_user"));
-
-app.post("/signup_user", async (req, res) => {
-  const { name, mobile, email, password, confirm_password, formattedAddress, latitude, longitude } = req.body;
-
-  let user = await usermodel.findOne({ mobile });
-  if (user) return res.send("User already exists");
-  if (password !== confirm_password) return res.send("Passwords do not match");
-
-  const hash = await bcrypt.hash(password, 10);
-
-  let created = await usermodel.create({
-    name,
-    mobile,
-    email,
-    password: hash,
-    latitude,
-    longitude,
-    formattedAddress,
-  });
-
-  let token = jwt.sign({ _id: created._id, mobile }, "wfhsoptbb");
-  res.cookie("token", token);
-  res.render("landingpage");
-});
-
-app.get("/signup_worker", (req, res) => res.render("signup_worker"));
-
-app.post("/signup_worker", profileupload.single("profilepic"), async (req, res) => {
-  try {
-    let { name, email, mobile, intro, pincode, job, minimumpay, doNotDisturbStart, doNotDisturbEnd } = req.body;
-
-    let profilepic = req.file?.filename;
-
-    let created = await workermodel.create({
-      name,
-      email,
-      mobile,
-      intro,
-      pincode,
-      job,
-      minimumpay,
-      doNotDisturbStart,
-      doNotDisturbEnd,
-      profilepic,
+    const transporter = nodemailer.createTransport({
+        service:'gmail',
+        auth:{
+            user:'shramsetumailer@gmail.com',
+            pass:'ywopqtrsmrlogzcz',
+        },
     });
 
-    let token = jwt.sign({ mobile }, "wfhsoptbb");
-    res.cookie("token", token);
+    const resetlink = `https://shram-setu.onrender.com/resetPassword?token=${token}`;
+
+    const mailoptions = {
+        from: '"Shram Setu" <shramsetumailer@gmail.com>',
+        to: email,
+        subject: '🔐 Reset your ShramSetu Password',
+        html: `
+            <p>Hello, ${user.name}</p>
+            <p>Click the link below to reset your password:</p>
+            <a href="${resetlink}">${resetlink}</a>
+            <p>This link will expire in 30 minutes.</p>
+        `,
+    };
+
+    transporter.sendMail(mailoptions , (error, info)=>{
+        if(error){
+            return console.log("Error : ",error);
+        }
+        console.log("email sent :",info.response);
+    });
+    res.redirect('/');
+});
+
+app.get('/howToHire',function(req,res){
+    res.render('howToHire');
+});
+
+app.get('/howToWork',function(req,res){
+    res.render('howToWork');
+});
+
+app.post('/',isLoggedIn , async function(req,res){
+    let {name, email, message} = req.body;
+    let feedback = await feedbackmodel.create({name,email,message});
+    res.redirect('/');
+})
+
+app.get('/resetPassword', function (req, res) {
+    const { token } = req.query;
+    if (!token) return res.status(400).send("Missing token");
+    res.render('resetPassword', { token });
+});
+
+app.post('/resetPassword',async function(req,res){
+    const {token ,password , confirm_password} = req.body;
+
+    if (!token) {
+        return res.status(400).send("Invalid or expired token");
+    }
+
+    if (password !== confirm_password) {
+        return res.status(400).send("Passwords do not match.");
+    }
+
+    try{
+        const decoded = jwt.verify(token, 'wfhsoptbb');
+        if (!decoded?.email) return res.status(400).send("Invalid token payload");
+        const email = decoded.email;
+
+        const user = await usermodel.findOne({
+            email:email,
+            resetToken: token,
+            resetTokenExpiry: { $gt: Date.now() }
+        });
+
+        if (!user) return res.status(400).send("Token expired or user not found");
+
+        user.password = await bcrypt.hash(password, 10);
+        user.resetToken = undefined;
+        user.resetTokenExpiry = undefined;
+
+        await user.save();
+
+        res.redirect('/login_user');
+    }
+    catch(err){
+        console.error("Reset password error:", err.message);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
+app.post('/uploadprofile',isLoggedIn , profileupload.single('image'),async function(req,res){
+    if(req.userType=='user'){
+        let user = await usermodel.findOne({mobile:req.user.mobile});
+        user.profilepic = req.file.filename;
+        await user.save();
+        res.redirect('/profile');
+    }
+    else if(req.userType=='worker'){
+        let worker = await workermodel.findOne({mobile:req.worker.mobile});
+        worker.profilepic = req.file.filename;
+        await worker.save();
+        res.redirect('/profile');
+    }
+})
+
+
+app.post('/uploadproblem', isLoggedIn, problemupload.array('pictures[]',4), async function(req, res) {
+    let { mobile } = req.user;
+
+    let user = await usermodel.findOne({ mobile }).populate('posts');
+    if (!user) return res.redirect("/login_user"); 
+
+    let {name,mobile: contactMobile,job:job,description,estimate_budget,formattedAddress,latitude,longitude} = req.body;
+
+    let filenames = req.files?.map(f => f.filename) || [];
+
+    let post = await postmodel.create({user: user._id,name,mobile: contactMobile,job: job,description,estimate_budget,formattedAddress,latitude,longitude,pictures: filenames});
+
+    user.posts.push(post._id);
+    await user.save();
+
+
     res.redirect("/");
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Worker signup error");
-  }
 });
 
-// LOGIN
-app.get("/login_user", (req, res) => res.render("login_user"));
 
-app.post("/login_user", async (req, res) => {
-  const { mobile, password } = req.body;
-
-  const user = await usermodel.findOne({ mobile });
-  if (!user) return res.send("User not found");
-
-  const ok = await bcrypt.compare(password, user.password);
-  if (!ok) return res.send("Invalid credentials");
-
-  const token = jwt.sign({ _id: user._id, mobile }, "wfhsoptbb");
-  res.cookie("token", token);
-  res.render("landingpage");
+app.get('/signup_user',function(req,res){
+    res.render('signup_user');
 });
 
-app.get("/login_worker", (req, res) => res.render("login_worker"));
+app.post('/signup_user', async function(req, res) {
+    let { name, mobile, email, password, confirm_password, formattedAddress, latitude, longitude } = req.body;
 
-app.post("/login_worker", async (req, res) => {
-  const { mobile, password } = req.body;
+    let user = await usermodel.findOne({ mobile });
+    if (user) return res.send("User already exists");
 
-  const worker = await workermodel.findOne({ mobile });
-  if (!worker) return res.send("Worker not found");
+    if (password !== confirm_password) return res.send('Passwords do not match');
 
-  const ok = await bcrypt.compare(password, worker.password);
-  if (!ok) return res.send("Invalid credentials");
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(password, salt, async function(err, hash) {
+            let created = await usermodel.create({name,mobile,email,password: hash,latitude,longitude,formattedAddress});
 
-  const token = jwt.sign({ _id: worker._id, mobile }, "wfhsoptbb");
-  res.cookie("token", token);
-
-  res.render("landingpage");
+            let token = jwt.sign({ _id: created._id, mobile, email }, 'wfhsoptbb');
+            res.cookie("token", token);
+            res.render("landingpage");
+        });
+    });
 });
 
-// -----------------------------------------------------------
-// MIDDLEWARE
-// -----------------------------------------------------------
-function isLoggedIn(req, res, next) {
-  const token = req.cookies?.token;
-  if (!token) return res.redirect("/login_user");
+app.get('/signup_worker',function(req,res){
+    res.render('signup_worker');
+});
 
-  try {
-    const data = jwt.verify(token, "wfhsoptbb");
-    req.user = data;
+app.post('/signup_worker', profileupload.fields([
+    { name: 'profilepic', maxCount: 1 },
+    { name: 'identity', maxCount: 1 }
+]), async function(req, res) {
+    try {
+        let { name, email, mobile, intro, pincode, job, minimumpay, doNotDisturbStart, doNotDisturbEnd, yearsExperience, ifsc, BankAccountNo} = req.body;
 
-    usermodel.findOne({ mobile: data.mobile }).then((user) => {
-      if (user) {
-        req.userType = "user";
-        return next();
-      }
+        const profilepic = req.files?.profilepic?.[0]?.filename || "default.png";
+        const identity = req.files?.identity?.[0]?.filename || null;
 
-      workermodel.findOne({ mobile: data.mobile }).then((worker) => {
-        if (worker) {
-          req.userType = "worker";
-          req.worker = worker;
-          return next();
+        if (!intro && req.body.shortBio) {
+            intro = req.body.shortBio;
         }
 
-        return res.status(403).send("Invalid token");
-      });
+        let created = await workermodel.create({
+            name,
+            email,
+            mobile,
+            intro,
+            pincode,
+            job,
+            yearsExperience,
+            minimumpay,
+            doNotDisturbStart,
+            doNotDisturbEnd,
+            ifsc,
+            BankAccountNo,
+            profilepic,
+            identity
+        });
+
+        let token = jwt.sign({ mobile }, 'wfhsoptbb');
+        res.cookie("token", token);
+        res.redirect('/');
+
+    } catch (error) {
+        console.error("Worker Create Error →", error.message);
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
+
+
+app.get('/login_user',function(req,res){
+    res.render('login_user');
+});
+
+app.post('/login_user',async function(req,res){
+    let {mobile ,password}= req.body;
+
+    let user = await usermodel.findOne({mobile});
+    if(!user)res.send("User not found");
+
+    bcrypt.compare(password, user.password, function(err, result) {
+        if(result){
+            let token = jwt.sign({_id:user._id , mobile:user.mobile},'wfhsoptbb');
+            res.cookie("token",token);
+            res.redirect('/');
+        }
+        else res.send("Something is wrong");
     });
-  } catch (err) {
-    res.status(401).send("Invalid or expired token");
-  }
+})
+
+app.get('/login_worker',function(req,res){
+    res.render('login_worker');
+});
+
+app.post('/login_worker',async function(req,res){
+    let {mobile ,password}= req.body;
+
+    let worker = await workermodel.findOne({mobile});
+    if(!worker)res.send("Worker not found");
+
+    bcrypt.compare(password, worker.password, function(err, result) {
+        if(result){
+            let token = jwt.sign({_id:worker._id , mobile},'wfhsoptbb');
+            res.cookie("token",token);
+            res.redirect('/')
+        }
+        else res.send("Something is wrong");
+    });
+})
+
+app.get('/hireworker',isLoggedIn , async function(req,res){
+    const workerType = req.query.worker;
+    let user = await usermodel.findOne({mobile:req.user.mobile});
+    res.render('hireworker',{user,workerType});
+});
+
+app.get('/logout', isLoggedIn , function(req,res){
+    res.clearCookie('token');
+    res.send('Logged out');
+})
+
+app.get('/profile', isLoggedIn, async function(req, res) {
+    if (req.userType === 'user') {
+        let user = await usermodel.findOne({ mobile: req.user.mobile });
+        return res.render('profile_worker', { user });
+    } else if (req.userType === 'worker') {
+        let worker = await workermodel.findOne({ mobile: req.user.mobile });
+        return res.render('profile_worker1', { worker });
+    } else {
+        return res.send("Not authorized");
+    }
+});
+
+
+function isLoggedIn(req, res, next) {
+    const token = req.cookies?.token;
+    if (!token) {
+        return res.redirect('/login_user');
+    }
+
+    try {
+        const data = jwt.verify(token, 'wfhsoptbb');
+        req.user = data; // works for both
+
+        // Now let's detect whether it's a user or worker:
+        usermodel.findOne({ mobile: data.mobile }).then((user) => {
+            if (user) {
+                req.userType = 'user';
+                return next();
+            } else {
+                workermodel.findOne({ mobile: data.mobile }).then((worker) => {
+                    if (worker) {
+                        req.userType = 'worker';
+                        req.worker = worker;
+                        return next();
+                    } else {
+                        return res.status(403).send("Invalid token data.");
+                    }
+                });
+            }
+        });
+    } catch (err) {
+        return res.status(401).send("Invalid or expired token");
+    }
 }
 
-// -----------------------------------------------------------
-// UPLOAD PROFILE IMAGE
-// -----------------------------------------------------------
-app.post("/uploadprofile", isLoggedIn, profileupload.single("image"), async (req, res) => {
-  if (req.userType === "user") {
-    let user = await usermodel.findOne({ mobile: req.user.mobile });
-    user.profilepic = req.file.filename;
-    await user.save();
-    return res.redirect("/profile");
-  }
-
-  if (req.userType === "worker") {
-    let worker = await workermodel.findOne({ mobile: req.user.mobile });
-    worker.profilepic = req.file.filename;
-    await worker.save();
-    return res.redirect("/profile");
-  }
-});
-
-// -----------------------------------------------------------
-// UPLOAD PROBLEMS
-// -----------------------------------------------------------
-app.post("/uploadproblem", isLoggedIn, problemupload.array("pictures[]", 4), async (req, res) => {
-  let user = await usermodel.findOne({ mobile: req.user.mobile }).populate("posts");
-  if (!user) return res.redirect("/login_user");
-
-  const filenames = req.files?.map((f) => f.filename) || [];
-
-  const { name, mobile: contactMobile, job, description, estimate_budget, formattedAddress, latitude, longitude } = req.body;
-
-  let post = await postmodel.create({
-    user: user._id,
-    name,
-    mobile: contactMobile,
-    job,
-    description,
-    estimate_budget,
-    formattedAddress,
-    latitude,
-    longitude,
-    pictures: filenames,
-  });
-
-  user.posts.push(post._id);
-  await user.save();
-
-  res.redirect("/");
-});
-
-// -----------------------------------------------------------
-// PROFILE PAGE
-// -----------------------------------------------------------
-app.get("/profile", isLoggedIn, async (req, res) => {
-  if (req.userType === "user") {
-    let user = await usermodel.findOne({ mobile: req.user.mobile });
-    return res.render("profile_user", { user });
-  }
-
-  if (req.userType === "worker") {
-    let worker = await workermodel.findOne({ mobile: req.user.mobile });
-    return res.render("profile_worker", { worker });
-  }
-});
-
-// -----------------------------------------------------------
-// LOGOUT
-// -----------------------------------------------------------
-app.get("/logout", isLoggedIn, (req, res) => {
-  res.clearCookie("token");
-  res.send("Logged out");
-});
-
-// -----------------------------------------------------------
-// REVERSE GEOLOCATION
-// -----------------------------------------------------------
-app.post("/mylocation", async (req, res) => {
+app.post('/mylocation', async (req, res) => {
   const { latitude, longitude } = req.body;
 
   try {
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-    );
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
     const data = await response.json();
 
     res.json({ formatted: data.display_name });
   } catch (err) {
-    res.status(500).json({ formatted: "Location fetch failed" });
+    res.status(500).json({ formatted: 'Location fetch failed' });
   }
 });
 
-// -------------------------------------------
-// CONTACT FORM ENDPOINT (/api/contact)
-// -------------------------------------------
-router.post("/api/contact", async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
-
-    const response = await fetch(process.env.FORMSPREE_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, message })
-    });
-
-    if (!response.ok) {
-      console.log("❌ Failed to send message to Formspree");
-      return res.status(400).json({ error: "Failed to send message" });
-    }
-
-    res.json({ success: true });
-
-  } catch (err) {
-    console.error("❌ Contact form error:", err);
-    res.status(500).json({ error: "Server error" });
-  }
+app.listen(3000,function(){
+    console.log('Shram setu started');
 });
-
-// -----------------------------------------------------------
-// SERVER
-// -----------------------------------------------------------
-app.listen(3000, () => console.log("Server running on port 3000"));

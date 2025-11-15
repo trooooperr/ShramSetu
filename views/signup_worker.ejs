@@ -189,13 +189,14 @@
                 <div class="flex justify-between items-center py-4">
                     <a href="/" class="text-3xl font-bold text-blue-700">ShramSetu</a>
                     <div class="hidden lg:flex items-center space-x-6">
-                        <a href="/#whyShramSetu" class="text-gray-700 font-semibold hover:text-blue-600">Why
+                        <a href="/landingpage#whyShramSetu" class="text-gray-700 font-semibold hover:text-blue-600">Why
                             ShramSetu</a>
-                        <a href="/howToWork" class="text-gray-700 font-semibold hover:text-blue-600">How to Work</a>
+                        <a href="/howToWork" class="text-gray-700 font-semibold hover:text-blue-600">How to Find
+                            Work</a>
                         <a href="/hireworker" class="text-gray-700 font-semibold hover:text-blue-600">Hire ShramSevik</a>
-                        <a href="/#categories"
+                        <a href="/landingpage#categories"
                             class="text-gray-700 font-semibold hover:text-blue-600">Categories</a>
-                        <a href="/#benefits"
+                        <a href="/landingpage#benefits"
                             class="text-gray-700 font-semibold hover:text-blue-600">Benefits</a>
                         <a href="/login_user"
                             class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-semibold">Join</a>
@@ -219,7 +220,7 @@
 
             <div x-show="open" x-transition x-cloak @click.away="open = false"
                 class="lg:hidden fixed top-16 left-0 right-0 w-full bg-[#cceaff] px-6 py-4 space-y-3 rounded-b-3xl shadow-md z-40">
-                <a href="/#whyShramSetu" class="flex items-center gap-2 p-2 rounded-xl hover:bg-blue-200 shadow">
+                <a href="#whyShramSetu" class="flex items-center gap-2 p-2 rounded-xl hover:bg-blue-200 shadow">
                     <div class="w-9 h-9 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center">
                         <i class="fas fa-lightbulb"></i>
                     </div>
@@ -231,23 +232,23 @@
                     </div>
                     <span class="text-base font-medium">Hire ShramSevik</span>
                 </a>
-                <a href="/howToWork" class="flex items-center gap-2 p-2 rounded-xl hover:bg-indigo-100 shadow">
+                <a href="/signup_worker" class="flex items-center gap-2 p-2 rounded-xl hover:bg-indigo-100 shadow">
                     <div class="w-9 h-9 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center">
                         <i class="fas fa-hammer"></i>
                     </div>
-                    <span class="text-base font-medium">How To Work</span>
+                    <span class="text-base font-medium">Find Work</span>
                 </a>
-                <a href="/#categories" class="flex items-center gap-2 p-2 rounded-xl hover:bg-sky-100 shadow">
+                <a href="#categories" class="flex items-center gap-2 p-2 rounded-xl hover:bg-sky-100 shadow">
                     <div class="w-9 h-9 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center">
                         <i class="fas fa-th-large"></i>
                     </div>
                     <span class="text-base font-medium">Categories</span>
                 </a>
-                <a href="/benefits" class="flex items-center gap-2 p-2 rounded-xl hover:bg-pink-100 shadow">
+                <a href="/about" class="flex items-center gap-2 p-2 rounded-xl hover:bg-pink-100 shadow">
                     <div class="w-9 h-9 bg-pink-100 text-pink-700 rounded-full flex items-center justify-center">
                         <i class="fas fa-users"></i>
                     </div>
-                    <span class="text-base font-medium">Benefits</span>
+                    <span class="text-base font-medium">About Us</span>
                 </a>
                 <a href="/login_user"
                     class="block text-center mt-4 bg-blue-600 text-white py-2.5 rounded-full font-semibold shadow hover:bg-blue-700 hover:scale-105 transition">
@@ -314,7 +315,7 @@
 
     <div class="lg:p-8 p-4 h-full flex flex-col justify-between relative overflow-hidden bg-cover rounded-xl lg:rounded-none bg-center bg-no-repeat" style="background-image: url('/images/carousel/workerbg.png');">
     
-    <form id="workerProfileForm" @submit.prevent="submitForm()" action="/signup_worker" method="POST" class="space-y-6 flex-grow max-h-full overflow-y-auto">
+   <form action="/signup_worker" method="POST" enctype="multipart/form-data" class="space-y-6 flex-grow max-h-full overflow-y-auto">
                     <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-6 relative">
                         <span
                             class="relative inline-block px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-2xl overflow-hidden animate-fade-in-up">
@@ -350,7 +351,7 @@
                                     <i class="fas fa-user text-blue-600 mr-1"></i>Full Name
                                 </label>
                                 <div>
-                                    <input type="text" id="fullName" name="fullName" x-model="formData.fullName"
+                                    <input type="text" id="name" name="name" x-model="formData.fullName"
                                         @input="validateStep(1)"
                                         :class="{'invalid-field': validationErrors.fullName}"
                                         placeholder="Your Full Name" required
@@ -388,11 +389,10 @@
                                 <span class="text-blue-600"><i class="fas fa-align-left mr-1"></i></span>
                                 Short Bio / Introduction
                             </label>
-                            <textarea name="shortBio" id="shortBio" rows="2" x-model="formData.shortBio"
+                            <textarea name="intro" id="shortBio"  rows="2" x-model="formData.shortBio"
                                 @input="validateStep(1)" :class="{'invalid-field': validationErrors.shortBio}"
                                 placeholder="Tell employers about yourself and your expertise."
-                                class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                                name="intro"></textarea>
+                                class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
                             <p x-show="validationErrors.shortBio" x-text="validationErrors.shortBio"
                                 class="error-message"></p>
                         </div>
@@ -602,18 +602,17 @@
                                         <ul x-show="openStart" @click.outside="openStart = false"
                                             class="absolute z-30 mt-1 w-full bg-white border border-blue-200 rounded-md shadow-lg max-h-60 overflow-y-auto">
                                             <template x-for="time in timeSlots" :key="time">
-                                                <li @click="selectTime('start', time); $parent.validateStep(3);"
+                                                <li @click="selectTime('start', time); $root.validateStep(3);"
                                                     class="px-4 py-2 hover:bg-blue-100 cursor-pointer text-blue-900">
                                                     <span x-text="time"></span>
                                                 </li>
                                             </template>
                                         </ul>
-                                        <input type="hidden" name="doNotDisturbStart" x-model="$parent.formData.dndStartTime">
+                                        <input type="hidden" name="doNotDisturbStart" x-model="$root.formData.dndStartTime">
                                         <p x-show="$parent.validationErrors.dndStartTime"
                                             x-text="$parent.validationErrors.dndStartTime" class="error-message"></p>
                                     </div>
                                 </div>
-
                                 <div class="relative">
                                     <label class="text-sm text-gray-600 mb-1 block">End Time</label>
                                     <div class="relative">
@@ -628,13 +627,13 @@
                                         <ul x-show="openEnd" @click.outside="openEnd = false"
                                             class="absolute z-30 mt-1 w-full bg-white border border-blue-200 rounded-md shadow-lg max-h-60 overflow-y-auto">
                                             <template x-for="time in timeSlots" :key="time">
-                                                <li @click="selectTime('end', time); $parent.validateStep(3);"
+                                                <li @click="selectTime('end', time); $root.validateStep(3);"
                                                     class="px-4 py-2 hover:bg-blue-100 cursor-pointer text-blue-900">
                                                     <span x-text="time"></span>
                                                 </li>
                                             </template>
                                         </ul>
-                                        <input type="hidden" name="doNotDisturbEnd" x-model="$parent.formData.dndEndTime">
+                                        <input type="hidden" name="doNotDisturbEnd" x-model="$root.formData.dndEndTime">
                                         <p x-show="$parent.validationErrors.dndEndTime" x-text="$parent.validationErrors.dndEndTime"
                                             class="error-message"></p>
                                     </div>
@@ -728,7 +727,7 @@
                             <label for="identityDocument" class="block mb-1 font-medium text-gray-700 text-sm">
                                 <i class="fas fa-file-alt text-blue-600 mr-1"></i> Aadhar Card / Identity Document
                             </label>
-                            <input type="file" id="identityDocument" name="identityDocument"
+                            <input type="file" id="identityDocument" name="identity"
                                 accept=".jpg,.jpeg,.png,.pdf" @change="handleIdentityDocumentUpload($event)"
                                 class="w-full text-sm px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
                             <p class="text-xs text-gray-500 mt-1">Accepted formats: JPG, JPEG, PNG, PDF. Max 5MB.</p>
@@ -805,9 +804,7 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-blue-800">Do Not Disturb Time:</p>
-                                <p
-                                    x-text="${formData.dndStartTime || 'Not Set'} to ${formData.dndEndTime || 'Not Set'}">
-                                </p>
+                                <p x-text="(formData.dndStartTime || 'Not Set') + ' to ' + (formData.dndEndTime || 'Not Set')"></p>
                             </div>
                             <div>
                                 <p class="font-semibold text-blue-800">Minimum Pay Expectation:</p>
@@ -999,12 +996,11 @@
                     if (file) {
                         if (!file.type.startsWith("image/")) {
                             this.validationErrors.profilePicture = "Please upload a valid image file.";
-                            event.target.value = ""; // Clear input
                             return;
                         }
+
                         if (file.size > 5 * 1024 * 1024) {
                             this.validationErrors.profilePicture = "Image size must be less than 5MB.";
-                            event.target.value = ""; // Clear input
                             return;
                         }
 
@@ -1027,26 +1023,26 @@
 
                 // Identity Document Handling
                 handleIdentityDocumentUpload(event) {
+                    const validTypes = ['image/jpeg', 'image/png', 'application/pdf'];  // 🔥 ADD THIS
+
                     const file = event.target.files[0];
                     this.formData.identityDocumentFile = null;
                     this.formData.identityDocumentPreview = '';
                     this.validationErrors.identityDocument = '';
 
                     if (file) {
-                        const validTypes = ["image/jpeg", "image/png", "application/pdf"];
                         if (!validTypes.includes(file.type)) {
                             this.validationErrors.identityDocument = "Only JPG, PNG, or PDF files are allowed.";
-                            event.target.value = "";
                             return;
                         }
+
                         if (file.size > 5 * 1024 * 1024) {
                             this.validationErrors.identityDocument = "File size must be under 5MB.";
-                            event.target.value = "";
                             return;
                         }
 
                         this.formData.identityDocumentFile = file;
-                        // If it's an image, create preview. If PDF, show a generic icon.
+
                         if (file.type.startsWith('image/')) {
                             const reader = new FileReader();
                             reader.onload = (e) => {
@@ -1054,11 +1050,12 @@
                             };
                             reader.readAsDataURL(file);
                         } else {
-                            // For PDF, use a generic PDF icon SVG. This SVG is a base64 encoded Font Awesome file-pdf icon.
-                            this.formData.identityDocumentPreview = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23cceaff" d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64V0L512 128H384zM160 352c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V384c0-17.7 14.3-32 32-32h32zM272 352c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H240c-17.7 0-32-14.3-32-32V384c0-17.7 14.3-32 32-32h32zM384 352c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H352c-17.7 0-32-14.3-32-32V384c0-17.7 14.3-32 32-32h32z"/></svg>';
+                            this.formData.identityDocumentPreview =
+                                'data:image/svg+xml;utf8,<svg ... />';
                         }
                     }
-                    this.validateStep(5); // Re-validate the step
+
+                    this.validateStep(5);
                 },
                 removeIdentityDocument() {
                     this.formData.identityDocumentFile = null;
@@ -1159,11 +1156,17 @@
                         if (this.formData.dndStartTime && this.formData.dndEndTime) {
                             // Optional: Add logic to ensure end time is after start time if needed
                             // For simplicity, just checking if both are selected if user provides them
-                        } else if ((this.formData.dndStartTime && !this.formData.dndEndTime) || (!this.formData.dndStartTime && this.formData.dndEndTime)) {
-                             this.validationErrors.dndStartTime = 'Both DND Start and End times are required if setting a range.';
-                             this.validationErrors.dndEndTime = 'Both DND Start and End times are required if setting a range.';
-                             isValid = false;
+                        } 
+                        if (this.formData.dndStartTime && !this.formData.dndEndTime) {
+                            this.validationErrors.dndEndTime = 'Please select End Time.';
+                            isValid = false;
                         }
+
+                        if (!this.formData.dndStartTime && this.formData.dndEndTime) {
+                            this.validationErrors.dndStartTime = 'Please select Start Time.';
+                            isValid = false;
+                        }
+
 
                         if (this.formData.minPayExpectation && (isNaN(this.formData.minPayExpectation) || parseFloat(this.formData.minPayExpectation) < 0)) {
                             this.validationErrors.minPayExpectation = 'Please enter a valid minimum pay expectation (positive number).';
@@ -1200,12 +1203,17 @@
 
                 // Navigation functions
                 nextStep(stepToValidate) {
-                    if (this.validateStep(stepToValidate)) {
+                    const step = stepToValidate || this.currentStep;
+                    const ok = this.validateStep(step);
+
+                    if (ok) {
                         this.currentStep++;
                         this.$nextTick(() => {
                             this.$el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         });
                     } else {
+                        console.warn("Validation failed for step", step, this.validationErrors);
+
                         this.$nextTick(() => {
                             const firstErrorField = document.querySelector('.invalid-field');
                             if (firstErrorField) {
@@ -1214,99 +1222,13 @@
                         });
                     }
                 },
+
+
                 prevStep() {
                     if (this.currentStep > 1) {
                         this.currentStep--;
                         this.$nextTick(() => {
                             this.$el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        });
-                    }
-                },
-
-                // Final form submission
-                submitForm() {
-                    // Validate all previous steps before final submission
-                    const step1Valid = this.validateStep(1);
-                    const step2Valid = this.validateStep(2);
-                    const step3Valid = this.validateStep(3);
-                    const step4Valid = this.validateStep(4);
-                    const step5Valid = this.validateStep(5);
-
-                    if (step1Valid && step2Valid && step3Valid && step4Valid && step5Valid) {
-                        const formElement = document.getElementById('workerProfileForm');
-                        const formDataToSend = new FormData();
-
-                        // Append all text/number data from formData
-                        for (const key in this.formData) {
-                            if (key !== 'profilePictureFile' && key !== 'profilePicturePreview' &&
-                                key !== 'identityDocumentFile' && key !== 'identityDocumentPreview') {
-                                formDataToSend.append('name', this.formData.fullName);
-                                formDataToSend.append('intro', this.formData.shortBio);
-                                formDataToSend.append('pincode', this.formData.servicePincode);
-                                formDataToSend.append('job', this.formData.workerSkills);
-                                formDataToSend.append('minimumpay', this.formData.minPayExpectation);
-                                formDataToSend.append('email', this.formData.contactEmail);
-                                formDataToSend.append('mobile', this.formData.contactPhone);
-                                formDataToSend.append('doNotDisturbStart', this.formData.dndStartTime);
-                                formDataToSend.append('doNotDisturbEnd', this.formData.dndEndTime);
-
-                            }
-                        }
-
-                        // Append file inputs
-                        if (this.formData.profilePictureFile) {
-                            formDataToSend.append('profilepic', this.formData.profilePictureFile);
-                        }
-                        if (this.formData.identityDocumentFile) {
-                            formDataToSend.append('identityDocument', this.formData.identityDocumentFile);
-                        }
-
-                        // --- DEMO LOGGING (Replace with actual AJAX/fetch call to backend) ---
-                        console.log("--- Worker Profile Data to Send ---");
-                        for (let pair of formDataToSend.entries()) {
-                            if (pair[1] instanceof File) {
-                                console.log(pair[0] + ': [File object: ' + pair[1].name + ', ' + pair[1].size + ' bytes]');
-                            } else {
-                                console.log(pair[0] + ': ' + pair[1]);
-                            }
-                        }
-                        console.log("--- End Worker Profile Data ---");
-
-                    
-                        fetch(formElement.action, {
-                            method: formElement.method,
-                            body: formDataToSend,
-                        })
-                        .then(response => response.text()) // Or .json() depending on backend response
-                        .then(data => {
-                            console.log('Success:', data);
-                            alert('Worker profile saved successfully!');
-                            // Reset form or redirect
-                            this.resetForm();
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Failed to save profile. Please try again.');
-                        });
-                    
-                        alert('Worker profile saved successfully (Demo)! Check console for data.');
-                        this.resetForm(); // Reset form for demo purposes
-                    } else {
-                        alert('Please complete all required fields correctly before submitting.');
-                        console.log("Validation Results:", {step1Valid, step2Valid, step3Valid, step4Valid, step5Valid});
-
-                        // Navigate back to the first step where validation failed
-                        if (!step1Valid) this.currentStep = 1;
-                        else if (!step2Valid) this.currentStep = 2;
-                        else if (!step3Valid) this.currentStep = 3;
-                        else if (!step4Valid) this.currentStep = 4;
-                        else this.currentStep = 5;
-
-                        this.$nextTick(() => {
-                            const firstErrorField = document.querySelector('.invalid-field');
-                            if (firstErrorField) {
-                                firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            }
                         });
                     }
                 },
@@ -1372,18 +1294,17 @@
                 selectTime(type, time) {
                     if (type === 'start') {
                         this.selectedStart = time;
-                        this.formData.dndStartTime = time;
+                        this.$root.formData.dndStartTime = time;
                         this.openStart = false;
                     } else {
                         this.selectedEnd = time;
-                        this.formData.dndEndTime = time;
+                        this.$root.formData.dndEndTime = time;
                         this.openEnd = false;
                     }
-                    this.validateStep(3); // Call validation on step 3 after time selection
+                    this.$root.validateStep(3);
                 }
             }
         }
     </script>
 </body>
-
 </html>
