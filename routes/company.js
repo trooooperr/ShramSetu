@@ -51,4 +51,24 @@ router.get('/dashboard', async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    const response = await fetch(process.env.FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message })
+    });
+
+    if (!response.ok) {
+      return res.status(400).json({ error: "Failed to send message" });
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 module.exports = router;
