@@ -16,7 +16,7 @@ const nodemailer = require("nodemailer");
 // ROUTES
 const companyRoutes = require("./routes/company");
 app.use("/company", companyRoutes);
-app.use("/api/contact", require("./routes/contact"));
+app.use("/api/contact", require("./routes/company"));
 
 // DB CONNECTION
 const mongoUri =
