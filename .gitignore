@@ -1,2 +1,6 @@
 .env
 node_modules/
+login_worker
+profile_worker
+profile_worker1
+services
