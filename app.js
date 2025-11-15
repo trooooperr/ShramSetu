@@ -257,7 +257,7 @@ app.get('/signup_worker',function(req,res){
     res.render('signup_worker');
 });
 
-app.post('/signup_worker', profileupload.single('profilepic'), async function(req, res) {
+app.post('/signup_worker', profileupload.single('pro filepic'), async function(req, res) {
     try {
         let { name, email, mobile, intro, pincode, job, minimumpay, doNotDisturbStart, doNotDisturbEnd } = req.body;
         const profilepic = req.file?.filename;
