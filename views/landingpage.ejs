@@ -896,47 +896,79 @@ const res = await fetch("/company/api/contact", {
   </div>
 </footer>
   
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.getElementById('menu-toggle');
-      const menu = document.getElementById('mobile-menu');
-      const icon = document.getElementById('hamburger-icon');
+<script>
 
-      toggle?.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        if (icon.classList.contains('fa-bars')) {
-          icon.classList.remove('fa-bars');
-          icon.classList.add('fa-times');
+document.addEventListener("DOMContentLoaded", () => {
+  const feedbackForm = document.getElementById("contactForm");
+
+  if (feedbackForm) {
+    feedbackForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      try {
+        const res = await fetch("/company/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message })
+        });
+
+        if (res.ok) {
+          document.getElementById("successMsg").classList.remove("hidden");
+          feedbackForm.reset();
         } else {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
+          alert("Something went wrong while submitting the form.");
         }
-      });
+      } catch (err) {
+        console.error("Form submit error:", err);
+      }
     });
-    
-  const communitySwiper = new Swiper(".communitySwiper", {
-    slidesPerView: 3,
-    spaceBetween: 20,
-    loop: true,
-    grabCursor: true,
-    simulateTouch: true,
-    allowTouchMove: true,
-    touchStartPreventDefault: false,
-    touchReleaseOnEdges: true,
-    pagination: {
-      el: ".community-pagination",
-      clickable: true
-    },
-    breakpoints: {
-      0:   { slidesPerView: 1.2 },
-      640: { slidesPerView: 1.5 },
-      768: { slidesPerView: 2 },
-      1024:{ slidesPerView: 3 }
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const icon = document.getElementById('hamburger-icon');
+
+  toggle?.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+    if (icon.classList.contains('fa-bars')) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-times');
+    } else {
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
     }
+  });
 });
 
 
-    AOS.init();
-  </script>
+const communitySwiper = new Swiper(".communitySwiper", {
+  slidesPerView: 3,
+  spaceBetween: 20,
+  loop: true,
+  grabCursor: true,
+  simulateTouch: true,
+  allowTouchMove: true,
+  touchStartPreventDefault: false,
+  touchReleaseOnEdges: true,
+  pagination: {
+    el: ".community-pagination",
+    clickable: true
+  },
+  breakpoints: {
+    0:   { slidesPerView: 1.2 },
+    640: { slidesPerView: 1.5 },
+    768: { slidesPerView: 2 },
+    1024:{ slidesPerView: 3 }
+  }
+});
+AOS.init();
+</script>
+
 </body>
 </html>
