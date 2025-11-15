@@ -16,7 +16,7 @@ const nodemailer = require("nodemailer");
 // ROUTES
 const companyRoutes = require("./routes/company");
 app.use("/company", companyRoutes);
-app.use("/api/contact", require("./routes/company"));
+
 
 // DB CONNECTION
 const mongoUri =
@@ -382,6 +382,32 @@ app.post("/mylocation", async (req, res) => {
     res.json({ formatted: data.display_name });
   } catch (err) {
     res.status(500).json({ formatted: "Location fetch failed" });
+  }
+});
+
+// -------------------------------------------
+// CONTACT FORM ENDPOINT (/api/contact)
+// -------------------------------------------
+router.post("/api/contact", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    const response = await fetch(process.env.FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message })
+    });
+
+    if (!response.ok) {
+      console.log("❌ Failed to send message to Formspree");
+      return res.status(400).json({ error: "Failed to send message" });
+    }
+
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error("❌ Contact form error:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
