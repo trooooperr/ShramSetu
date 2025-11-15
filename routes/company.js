@@ -24,33 +24,6 @@ function getDistance(lat1, lon1, lat2, lon2) {
 }
 
 // -------------------------------------------
-// 🚀 CONTACT FORM ENDPOINT (POST /api/contact)
-// -------------------------------------------
-router.post("/", async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
-
-    const response = await fetch(process.env.FORMSPREE_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, message })
-    });
-
-    if (!response.ok) {
-      console.log("Failed to send form data to Formspree");
-      return res.status(400).json({ error: "Failed to send message" });
-    }
-
-    res.json({ success: true });
-    console.log("Formspree Endpoint:", process.env.FORMSPREE_ENDPOINT);
-
-  } catch (err) {
-    console.error("Contact form error:", err);
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
-// -------------------------------------------
 // DASHBOARD ROUTE (unchanged)
 // -------------------------------------------
 router.get('/dashboard', async (req, res) => {
@@ -84,5 +57,26 @@ router.get('/dashboard', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+
+router.post("/api/contact", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    if (!name || !email || !message) {
+      return res.status(400).json({ success: false, message: "All fields required" });
+    }
+
+    // Save to MongoDB
+    const feedbackmodel = require("../models/feedback");
+    await feedbackmodel.create({ name, email, message });
+
+    return res.json({ success: true });
+  } catch (error) {
+    console.error("Contact API Error:", error.message);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
 
 module.exports = router;
