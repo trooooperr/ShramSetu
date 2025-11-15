@@ -4,9 +4,7 @@ const UserPost = require('../models/post');
 const Worker = require('../models/worker');
 const User = require('../models/user');
 
-// Correct fetch import for CommonJS (Node.js)
-const fetch = (...args) =>
-  import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fetch = require("node-fetch");
 
 // -------------------------------------------
 // Distance Calculator
@@ -44,6 +42,7 @@ router.post("/", async (req, res) => {
     }
 
     res.json({ success: true });
+    console.log("Formspree Endpoint:", process.env.FORMSPREE_ENDPOINT);
 
   } catch (err) {
     console.error("Contact form error:", err);
