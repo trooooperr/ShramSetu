@@ -67,16 +67,14 @@ router.post("/api/contact", async (req, res) => {
       return res.status(400).json({ success: false, message: "All fields required" });
     }
 
-    // Save to MongoDB
     const feedbackmodel = require("../models/feedback");
     await feedbackmodel.create({ name, email, message });
 
     return res.json({ success: true });
-  } catch (error) {
-    console.error("Contact API Error:", error.message);
-    res.status(500).json({ success: false, message: "Server error" });
+  } catch (err) {
+    console.error("Contact API Error:", err);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 });
-
 
 module.exports = router;
