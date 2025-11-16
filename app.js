@@ -14,8 +14,8 @@ const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
 
-const companyRoutes = require('./routes/company');
-app.use('/company', companyRoutes);
+const contactRouter = require('./routes/contact.js'); 
+app.use('/api', contactRouter);
 
 
 const mongoUri = process.env.USE_LOCAL_DB === 'true'

@@ -1,16 +1,17 @@
-import express from 'express';
-import fetch from 'node-fetch';
-import dotenv from 'dotenv';
-import FormData from 'form-data';
+const express = require('express');
+const fetch = require('node-fetch');
+const dotenv = require('dotenv');
+const FormData = require('form-data');
 
 dotenv.config();
 const router = express.Router();
 
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
+
 router.post('/send-email', async (req, res) => {
   try {
     const formData = new FormData();
-
-    // req.body is parsed as object via express.json() or express.urlencoded()
     for (const key in req.body) {
       formData.append(key, req.body[key]);
     }
@@ -18,7 +19,7 @@ router.post('/send-email', async (req, res) => {
     const response = await fetch(process.env.FORMSPREE_ENDPOINT, {
       method: 'POST',
       body: formData,
-      headers: { Accept: 'application/json' } // don't set Content-Type
+      headers: { Accept: 'application/json' }
     });
 
     if (response.ok) {
@@ -32,4 +33,4 @@ router.post('/send-email', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

@@ -888,7 +888,7 @@ form.addEventListener('submit', async (e) => {
   const formData = new FormData(form);
 
   try {
-    // Send form data to your backend, which has the Formspree secret in .env
+   
     const response = await fetch('/api/send-email', {
       method: 'POST',
       body: formData
