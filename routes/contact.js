@@ -1,13 +1,12 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const dotenv = require('dotenv');
 const FormData = require('form-data');
+require('dotenv').config();
 
-dotenv.config();
 const router = express.Router();
 
-router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
 
 router.post('/send-email', async (req, res) => {
   try {

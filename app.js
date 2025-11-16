@@ -14,7 +14,7 @@ const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
 
-const contactRouter = require('./routes/contact.js'); 
+const contactRouter = require('./routes/contact'); 
 app.use('/api', contactRouter);
 
 
