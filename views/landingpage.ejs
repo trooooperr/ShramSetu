@@ -882,8 +882,7 @@ const formStatus = document.getElementById('formStatus');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Sending...';
+  submitBtn.textContent = 'Sending...'
 
   const formData = new FormData(form);
 
