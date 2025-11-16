@@ -79,8 +79,8 @@
 
 <h3>🤝 Contributors</h3>
 
-•	Alok Gupta<br>
-•	Chaitanya<br>
+•	Alok Kumar Gupta<br>
+•	Chaitanya Bishnoi<br>
 
 <h3>Core Developers</h3>
 	•	Backend Development<br>
