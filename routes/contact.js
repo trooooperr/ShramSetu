@@ -5,9 +5,6 @@ require('dotenv').config();
 
 const router = express.Router();
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
-
 router.post('/send-email', async (req, res) => {
   try {
     const formData = new FormData();

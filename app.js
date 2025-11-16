@@ -13,11 +13,6 @@ const fetch = require('node-fetch');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
-
-const contactRouter = require('./routes/contact'); 
-app.use('/api', contactRouter);
-
-
 const mongoUri = process.env.USE_LOCAL_DB === 'true'
   ? process.env.LOCAL_MONGO_URI
   : process.env.CLOUD_MONGO_URI;
@@ -43,7 +38,9 @@ const usermodel = require('./models/user');
 const workermodel = require('./models/worker');
 const postmodel = require('./models/post');
 const feedbackmodel = require('./models/feedback');
-const post = require('./models/post');
+
+const contactRouter = require('./routes/contact'); 
+app.use('/api', contactRouter);
 
 
 
@@ -291,7 +288,7 @@ app.post('/login_user',async function(req,res){
     let {mobile ,password}= req.body;
 
     let user = await usermodel.findOne({mobile});
-    if(!user)res.send("User not found");
+    if(!user) res.send("User not found");
 
     bcrypt.compare(password, user.password, function(err, result) {
         if(result){
@@ -392,7 +389,6 @@ function isLoggedIn(req, res, next) {
 }
 
 
-
 function cookieOptions(req) {
   const isLocal = req.headers.host.includes("localhost");
 
@@ -404,7 +400,6 @@ function cookieOptions(req) {
     };
   }
 
-  // For render.com https
   return {
     httpOnly: true,
     secure: true,
