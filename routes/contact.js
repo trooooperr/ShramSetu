@@ -6,12 +6,11 @@ import FormData from 'form-data';
 dotenv.config();
 const router = express.Router();
 
-router.use(express.urlencoded({ extended: true }));
-router.use(express.json());
-
 router.post('/send-email', async (req, res) => {
   try {
     const formData = new FormData();
+
+    // req.body is parsed as object via express.json() or express.urlencoded()
     for (const key in req.body) {
       formData.append(key, req.body[key]);
     }
@@ -19,7 +18,7 @@ router.post('/send-email', async (req, res) => {
     const response = await fetch(process.env.FORMSPREE_ENDPOINT, {
       method: 'POST',
       body: formData,
-      headers: { Accept: 'application/json' }
+      headers: { Accept: 'application/json' } // don't set Content-Type
     });
 
     if (response.ok) {
