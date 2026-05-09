@@ -1,106 +1,189 @@
 <h1 align="center">SHRAMSETU</h1>
 
+<p align="center">
+  <b>Digital Bridge Between Workers & Users</b>
+</p>
+
+<p align="center">
+  Connecting Skilled Laborers With Real Work • Zero Commission • Fast & Reliable Hiring
+</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com/?color=0AFF99&size=26&center=true&vCenter=true&width=900&lines=Connecting+Workers+With+Real+Jobs;Location-Based+Job+Matching+System;Zero+Middlemen+%7C+Zero+Commission;Fast+Transparent+and+Reliable+Workflow;Empowering+Daily+Wage+Workers+Digitally" />
+</p>
+
+
+## Preview
+
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com/?color=white&size=28&center=true&vCenter=true&width=800&lines=Digital+Bridge+Between+Workers+and+Users;Connecting+Skilled+Laborers+With+Real+Work;Zero+Middlemen+Zero+Commission+System;Fast%2C+Transparent+%26+Reliable+Job+Workflow" />
+
+<img src="https://github.com/user-attachments/assets/6402ecad-5fbc-413c-b049-501de09dd006" width="45%" />
+<img src="https://github.com/user-attachments/assets/11e0fba5-8500-4f1b-a029-f1135e6ec53d" width="45%" />
+
+<br><br>
+
+<img src="https://github.com/user-attachments/assets/6dd43050-b2fa-4b22-9546-939f8939bd66" width="45%" />
+<img src="https://github.com/user-attachments/assets/3b331211-0b22-4673-82b7-08d8dbac49f4" width="45%" />
+
 </div>
-<br>
+
+
+# About ShramSetu
+
+**ShramSetu** is a smart digital platform that connects skilled workers with users who need quick and reliable services.
+
+The platform removes middlemen and commission systems, enabling direct communication and fair job opportunities between workers and customers.
+
+### Services Offered
+
+- Plumbing
+- Electrical Work
+- Carpentry
+- Cleaning Services
+- Daily Wage Assistance
+- Short-Term Tasks
+- Household Repairs
+
+
+# Core Features
+
+## For Users
+
+- Post job tasks with category & details
+- Get bids from nearby workers
+- Compare pricing before hiring
+- Hire workers instantly
+- Real-time communication system
+- Transparent workflow
+- Fast service discovery
+
+
+## For Workers
+
+- Create professional worker profile
+- Showcase skills & expertise
+- Receive location-based job alerts
+- Place bids on available jobs
+- Negotiate pricing directly
+- Increase daily earnings
+- Fair job distribution system
+
+
+# Why ShramSetu Stands Out
+
+- Zero Commission Model
+- Real-Time Location Based Matching
+- Fair Bidding Mechanism
+- Fast Auto-Assign System
+- User–Worker Chat Support
+- Modern UI/UX Experience
+- Fully Responsive Design
+
+
+# Tech Stack
+
+## Frontend
+
+- HTML5
+- CSS3
+- Tailwind CSS
+- JavaScript
+- EJS Templating
+- Responsive UI Design
+
+
+## Backend
+
+- Node.js
+- Express.js
+- REST APIs
+
+
+## Database
+
+- MongoDB
+- Mongoose
+
+
+## Tools & Deployment
+
+- Git & GitHub
+- Postman
+- Render
+
+
+# System Workflow
+
+```text
+User Posts Job
+       ↓
+Nearby Workers Receive Notification
+       ↓
+Workers Place Bids
+       ↓
+User Compares Pricing & Profiles
+       ↓
+Worker Gets Hired
+       ↓
+Task Completion & Communication
+```
+
+
+# Future Enhancements
+
+- Live Worker Tracking
+- Secure Wallet & Payments
+- Video Calling Facility
+- Worker KYC Verification
+- Smart Recommendation System
+- Multilingual Support
+- Ratings & Review System
+- Push Notifications
+
+
+# Contributors
+
 <div align="center">
-<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/6402ecad-5fbc-413c-b049-501de09dd006" />
-  <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/11e0fba5-8500-4f1b-a029-f1135e6ec53d" />
-    <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/6dd43050-b2fa-4b22-9546-939f8939bd66" />
-      <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/3b331211-0b22-4673-82b7-08d8dbac49f4" />
+
+| Name | Role |
+|------|------|
+| **Alok Kumar Gupta** | FullStack Development & UI/UX |
+| **Chaitanya Bishnoi** | FullStack Development |
+
 </div>
+
+
+# Contributing
+
+Contributions are always welcome!
+
+If you'd like to improve ShramSetu:
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+
+# Live Deployment
+
+<p align="center">
   
-<h1>⭐ What is ShramSetu?</h1>
+### https://shram-setu.onrender.com
 
-**ShramSetu is a digital platform that connects skilled workers with users who need quick and reliable services such as:**<br>
-<br>
-	•	Plumbing<br>
-	•	Electrical work<br>
-	•	Cleaning<br>
-	•	Carpentry<br>
-	•	Daily wage assistance<br>
-	•	Short-term job tasks<br>
-
-**Workers receive job notifications instantly based on location, and users can directly hire them without middlemen or commission.**
-
-<h1>🧩 Core Features</h1><br>
-
-**🔹 For Users**<br>
-<br>
-
-✔ Post job tasks with category, details & estimated time<br>
-✔ Receive bids from nearby workers<br>
-✔ Compare pricing & hire instantly<br>
-✔ Contact workers via call, chat, or voice message<br>
-✔ Transparent & quick workflow<br>
-
-**🔹 For Workers**<br>
-<br>
-✔ Create profile & showcase skills<br>
-✔ Receive job notifications based on location<br>
-✔ Place bids and negotiate pricing<br>
-✔ Increase daily earnings with multiple tasks<br>
-✔ Auto-assign system ensures fair distribution<br>
-<br>
-
-<h2>Why ShramSetu Stands Out</h2><br>
-	•	Zero commission model<br>
-	•	Real-time location-based job system<br>
-	•	Fair bidding mechanism<br>
-	•	Fast-track auto-assign (20 minutes rule)<br>
-	•	User–Worker chat system<br>
-	•	Smooth and modern UI/UX<br>
-	<br>
-
-<h1>🛠️ Tech Stack</h1>
-<br>
-
-**Frontend**
-<br>
-	•	HTML, CSS, Tailwind<br>
-	•	JavaScript<br>
-	•	EJS templating<br>
-	•	Responsive UI design<br>
-<br>
-**Backend**<br>
-	•	Node.js<br>
-	•	Express.js<br>
-	•	REST APIs<br>
-
-**Database**<br>
-	•	MongoDB<br>
-	•	Mongoose<br>
-
-**Tools**<br>
-	•	Git & GitHub<br>
-	•	Render / Vercel for hosting<br>
-	•	Postman for testing<br>
-
-<h3>🤝 Contributors</h3>
-
-•	Alok Kumar Gupta<br>
-•	Chaitanya Bishnoi<br>
-
-<h3>Core Developers</h3>
-	•	Backend Development<br>
-	•	Frontend UI/UX<br>
-	•	Testing & Deployment
-
-<h2>Want to contribute? Pull requests are welcome!</h2>
-<h3>🌟 Future Enhancements</h3>
-	•	Live job tracking<br>
-	•	Secure wallet system<br>
-	•	Implement Video Calling Facilty<br>
-	•	Worker KYC verification<br>
-	•	Improved recommendation system<br>
-	•	Multilingual support<br>
-
-<h1>🌐 Live Deployment</h1>
-
-**https://shram-setu.onrender.com**
+</p>
 
 
+# Project Vision
+
+> **ShramSetu aims to digitally empower skilled workers by creating a transparent, commission-free, and accessible employment ecosystem for everyone.**
 
 
+<div align="center">
 
+## Support the Project
+
+If you like this project, give it a star on GitHub!
+
+</div>
