@@ -20,8 +20,6 @@
 <img src="https://github.com/user-attachments/assets/6402ecad-5fbc-413c-b049-501de09dd006" width="45%" />
 <img src="https://github.com/user-attachments/assets/11e0fba5-8500-4f1b-a029-f1135e6ec53d" width="45%" />
 
-<br><br>
-
 <img src="https://github.com/user-attachments/assets/6dd43050-b2fa-4b22-9546-939f8939bd66" width="45%" />
 <img src="https://github.com/user-attachments/assets/3b331211-0b22-4673-82b7-08d8dbac49f4" width="45%" />
 
