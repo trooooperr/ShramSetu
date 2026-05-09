@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "form-data": "^4.0.4",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.0",
+    "multer": "^2.0.0",
+    "node-fetch": "^2.7.0",
+    "nodemailer": "^7.0.3",
+    "path": "^0.12.7",
+    "punycode": "^2.3.1",
+    "streamsearch": "^1.1.0"
+  },
+  "scripts": {
+    "dev": "nodemon --exec ts-node app.ts",
+    "start": "node app.js"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/mongoose": "^5.11.96",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^25.6.2",
+    "@types/node-fetch": "^2.6.13",
+    "@types/nodemailer": "^8.0.0",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}

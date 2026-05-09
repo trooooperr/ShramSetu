@@ -1,0 +1,755 @@
+import { LegacyHtmlPage } from '../../components/LegacyHtmlPage';
+
+const html = String.raw`
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShramSetu | Post Job</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body class="bg-gray-100">
+
+  <style>
+      html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  /* Image Preview Styles */
+  /* This targets the images within the preview container */
+  #previewImages img {
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: 2px solid #d1e9ff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;           /* fallback width */
+    max-width: 100px;      /* default size */
+    height: auto;
+  }
+
+  @media (min-width: 640px) {
+    #previewImages img {
+      max-width: 120px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #previewImages img {
+      max-width: 140px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #previewImages img {
+      max-width: 160px;
+    }
+  }
+
+  /* Carousel specific styles */
+  .carousel-item {
+    transition: opacity 0.5s ease-in-out;
+    width: 100%; /* Ensure they take full width of container */
+    height: 100%; /* Ensure they take full height of container */
+    object-fit: cover; /* Maintain aspect ratio and cover */
+  }
+
+  .carousel-item.active {
+    opacity: 1;
+    position: relative; /* Active item should be in flow for proper sizing if container is flex/grid */
+  }
+
+  .carousel-item:not(.active) {
+    opacity: 0;
+    position: absolute; /* To stack them for opacity transition */
+    top: 0;
+    left: 0;
+  }
+
+  /* Remove Image Button */
+  .remove-image-btn {
+    position: absolute;
+    top: 4px; /* Adjusted from -5px */
+    right: 4px; /* Adjusted from -5px */
+    background-color: rgba(239, 68, 68, 0.9); /* red-500 with slight opacity */
+    color: white;
+    border-radius: 50%;
+    width: 24px; /* Slightly larger for better clickability */
+    height: 24px; /* Slightly larger for better clickability */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Ensure it's above the image */
+  }
+
+  .image-preview-container {
+    position: relative;
+    display: inline-block; /* For proper positioning of remove button */
+  }
+
+
+  /* Custom validation styles for better UX */
+  .invalid-field {
+    border-color: #ef4444 !important; /* red-500 */
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+  }
+  .error-message {
+    color: #ef4444; /* red-500 */
+    font-size: 0.875rem; /* text-sm */
+    margin-top: 0.25rem;
+  }
+
+  /* Fade-in animation for step transitions */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  /* Custom animation keyframe for heading */
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+  </style>
+
+<div x-data="{ open: false }">
+  <!-- ✅ Navbar -->
+<nav class="bg-[#cceaff] shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="/" class="text-3xl font-bold text-blue-700">ShramSetu</a>
+        <div class="hidden lg:flex items-center space-x-6">
+          <a href="/#whyShramSetu" class="text-gray-700 font-semibold hover:text-blue-600">Why ShramSetu</a>
+          <a href="/howToHire" class="text-gray-700 font-semibold hover:text-blue-600">How To Hire</a>
+          <a href="/signup_worker" class="text-gray-700 font-semibold hover:text-blue-600">Find Work</a>
+          <a href="/#categories" class="text-gray-700 font-semibold hover:text-blue-600">Categories</a>
+          <a href="/#benefits" class="text-gray-700 font-semibold hover:text-blue-600">Benefits</a>
+          <a href="/login_user"
+            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-semibold">Join</a>
+        </div>
+        <div class="lg:hidden">
+          <button @click="open = !open" type="button"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-700 hover:bg-blue-100">
+            <svg x-show="!open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg x-show="open" x-cloak class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div x-show="open" x-transition x-cloak @click.away="open = false"
+      class="lg:hidden fixed top-16 left-0 right-0 w-full bg-[#cceaff] px-6 py-4 space-y-3 rounded-b-3xl shadow-md z-40">
+      <a href="/#whyShramSetu" class="flex items-center gap-2 p-2 rounded-xl hover:bg-blue-200 shadow">
+        <div class="w-9 h-9 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <span class="text-base font-medium">Why ShramSetu</span>
+      </a>
+      <a href="/howToHire" class="flex items-center gap-2 p-2 rounded-xl hover:bg-green-100 shadow">
+        <div class="w-9 h-9 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <span class="text-base font-medium">How To Hire</span>
+      </a>
+      <a href="/signup_worker" class="flex items-center gap-2 p-2 rounded-xl hover:bg-indigo-100 shadow">
+        <div class="w-9 h-9 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-hammer"></i>
+        </div>
+        <span class="text-base font-medium">Find Work</span>
+      </a>
+      <a href="/#categories" class="flex items-center gap-2 p-2 rounded-xl hover:bg-sky-100 shadow">
+        <div class="w-9 h-9 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-th-large"></i>
+        </div>
+        <span class="text-base font-medium">Categories</span>
+      </a>
+      <a href="/#benefits" class="flex items-center gap-2 p-2 rounded-xl hover:bg-pink-100 shadow">
+        <div class="w-9 h-9 bg-pink-100 text-pink-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-users"></i>
+        </div>
+        <span class="text-base font-medium">Benefits</span>
+      </a>
+      <a href="/login_user"
+        class="block text-center mt-4 bg-blue-600 text-white py-2.5 rounded-full font-semibold shadow hover:bg-blue-700 hover:scale-105 transition">
+        <i class="fas fa-arrow-right-to-bracket mr-1"></i> Join Now
+      </a>
+    </div>
+  </nav>
+
+<main class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat bg-fixed overflow-hidden" style="background-image: url('/legacy/images/carousel/mainbg.png');">
+  <div x-data="jobPostForm()" x-init="initForm()" class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[2fr_3fr]  rounded-3xl shadow-3xl overflow-hidden p-6 lg:p-0 min-h-[500px] lg:min-h-[550px]">
+    <div class="relative h-64 sm:h-80 md:h-[600px]  hidden lg:block lg:h-full flex items-center justify-center bg-blue-200 rounded-2xl lg:rounded-l-3xl lg:rounded-r-none p-4 lg:p-0">
+      <div x-data="{
+        images: [
+          '/legacy/images/carousel/userpage.1.png',
+          '/legacy/images/carousel/userpage.2.png',
+          '/legacy/images/carousel/userpage.3.png',
+          '/legacy/images/carousel/userpage.4.png'
+        ],
+        currentIndex: 0,
+        autoplayInterval: null,
+        init() {
+          this.startAutoplay();
+        },
+        startAutoplay() {
+          this.autoplayInterval = setInterval(() => {
+            this.nextImage();
+          }, 3000);
+        },
+        stopAutoplay() {
+          clearInterval(this.autoplayInterval);
+        },
+        nextImage() {
+          this.currentIndex = (this.currentIndex + 1) % this.images.length;
+        },
+        prevImage() {
+          this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+        },
+        goToImage(index) {
+          this.currentIndex = index;
+          this.stopAutoplay();
+          this.startAutoplay();
+        }
+      }"
+      @mouseenter="stopAutoplay"
+      @mouseleave="startAutoplay"
+      class="relative w-full h-full overflow-hidden rounded-xl lg:rounded-l-3xl lg:rounded-r-none">
+        <template x-for="(image, index) in images" :key="index">
+          <img :src="image"
+            :class="{ 'active': currentIndex === index }"
+            class="carousel-item rounded-xl lg:rounded-l-3xl lg:rounded-r-none"
+            alt="Job posting image">
+        </template>
+
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
+          <template x-for="(image, index) in images" :key="index">
+            <button @click="goToImage(index)"
+              :class="{ 'bg-blue-600': currentIndex === index, 'bg-gray-300': currentIndex !== index }"
+              class="w-3 h-3 rounded-full focus:outline-none transition-colors duration-300"></button>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:p-8 p-4 h-full flex flex-col justify-between relative overflow-hidden rounded-xl lg:rounded-none bg-cover bg-center bg-no-repeat" style="background-image: url('/legacy/images/carousel/workerbg.png');">
+    <form id="postJobForm" @submit.prevent="submitForm()" class="relative space-y-6 flex-grow max-h-full overflow-y-auto backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-2xl p-6">
+        <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-6 relative">
+            <span class="relative inline-block px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-2xl overflow-hidden animate-fade-in-up">
+                <span class="absolute top-0 left-0 w-full h-full bg-white opacity-10 blur-sm rounded-full"></span>
+                <i class="fas fa-bullhorn mr-2 text-xl"></i>
+                <span class="tracking-wide">Post New Job</span>
+                <span class="absolute -bottom-1 -right-1 text-4xl text-white opacity-20 transform rotate-45"><i class="fas fa-tools"></i></span>
+            </span>
+        </h2>
+
+        <div class="flex justify-center space-x-3 mb-8">
+            <template x-for="stepNum in 4" :key="stepNum">
+                <div @click="currentStep = stepNum"
+                    :class="{ 'bg-blue-600 transform scale-110 shadow-lg': currentStep === stepNum, 'bg-blue-300': currentStep < stepNum, 'bg-blue-400': currentStep > stepNum }"
+                    class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold cursor-pointer transition-all duration-300 ease-in-out">
+                    <span x-text="stepNum"></span>
+                </div>
+            </template>
+        </div>
+
+
+        <section x-show="currentStep === 1" class="bg-white border border-gray-300 shadow-md rounded-xl p-6 space-y-3 animate-fade-in">
+          <h2 class="text-xl font-semibold text-blue-700 flex items-center gap-2">
+            <i class="fas fa-briefcase text-blue-600"></i> Job Details
+          </h2>
+
+          <div class="form-group" x-data="{
+    open: false,
+    selected: { value: '', label: 'Select Job Category' },
+    options: getCategoryOptions(),
+    init() {
+        if (formData.jobCategory) {
+            const found = this.options.find(opt => opt.value === formData.jobCategory);
+            if (found) this.selected = found;
+        }
+    },
+    selectOption(option) {
+        this.selected = option;
+        this.open = false;
+        formData.jobCategory = option.value;
+        formData.jobCategoryLabel = option.label;
+        validateStep(1);
+    }
+}">
+    <label for="jobCategory" class="block text-sm font-medium mb-1 text-gray-700">
+        <i class="fas fa-tools text-blue-600 mr-1"></i> Job Category
+    </label>
+
+    <div class="relative">
+        <button type="button" @click="open = !open"
+            :class="{ 'invalid-field': validationErrors.jobCategory }"
+            class="w-full text-left px-4 py-2 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-blue-500 flex justify-between items-center text-gray-800 shadow-sm hover:border-blue-400 transition-all">
+            <span x-text="selected.label || 'Select Job Category'" class="text-left w-full truncate"></span>
+            <i class="fas" :class="open ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+        </button>
+
+        <ul x-show="open" @click.outside="open = false" x-cloak
+            class="absolute z-20 mt-1 w-full bg-white border border-blue-300 rounded-md shadow max-h-60 overflow-y-auto">
+            <template x-for="option in options" :key="option.value">
+                <li @click="selectOption(option)"
+                    class="px-4 py-2 hover:bg-blue-100 cursor-pointer text-blue-900 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <i :class="option.icon" class="text-blue-500 w-5 text-center"></i>
+                        <span x-text="option.label"></span>
+                    </div>
+                    <i x-show="selected.value === option.value"
+                        class="fas fa-check-circle text-blue-500 ml-2"></i>
+                </li>
+            </template>
+        </ul>
+    </div>
+
+    <input type="hidden" id="jobCategory" name="job" x-model="formData.jobCategory">
+    <p x-show="validationErrors.jobCategory" x-text="validationErrors.jobCategory" class="error-message"></p>
+</div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1 ">
+              <i class="fas fa-align-left text-blue-600 mr-1"></i> Job Description
+            </label>
+            <textarea
+              x-model="formData.jobDescription"
+              @input="validateStep(1)"
+              :class="{'invalid-field': validationErrors.jobDescription}"
+              rows="2"
+              class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              placeholder="Describe the job requirements..."
+              name="description"
+            ></textarea>
+            <p x-show="validationErrors.jobDescription" x-text="validationErrors.jobDescription" class="error-message"></p>
+          </div>
+
+          <div class="border border-gray-300 rounded-md  p-3 rounded-md bg-blue-50/20">
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              <i class="fas fa-image text-blue-600 mr-1"></i> Upload Images (Max: 4)
+            </label>
+            <input
+              type="file"
+              multiple
+              @change="handleImageUpload($event)"
+              class="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-colors cursor-pointer"
+              accept="image/*"
+              name="pictures[]"
+            />
+            <p class="text-xs text-gray-500 mt-1">Accepted formats: JPG, JPEG, PNG. Max 10MB per image.</p>
+            <p x-show="validationErrors.jobImages" x-text="validationErrors.jobImages" class="error-message mt-1"></p>
+
+            <div class="flex flex-wrap gap-2 mt-4 p-2 border border-gray-200 rounded-md bg-white shadow-inner" id="previewImages">
+              <template x-for="(imgSrc, index) in formData.imagePreviews" :key="index">
+                <div class="image-preview-container w-24 h-24 border border-blue-200 rounded-md shadow-sm overflow-hidden">
+                  <img :src="imgSrc" class="w-full h-full object-cover" alt="Image Preview">
+                  <button type="button" @click="removeImage(index)" class="remove-image-btn">×</button>
+                </div>
+              </template>
+              <p x-show="formData.imagePreviews.length === 0" class="text-gray-500 italic text-sm w-full text-center py-2">
+                  No images selected yet.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex justify-end mt-6">
+            <button
+              type="button"
+              @click="nextStep(1)"
+              class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+            >
+              Next <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </section>
+
+        <section x-show="currentStep === 2" class="bg-white border border-blue-200 shadow-md rounded-xl p-6 space-y-6 animate-fade-in">
+          <h2 class="text-xl font-semibold text-blue-700 flex items-center gap-2">
+            <i class="fas fa-map-marker-alt text-blue-600"></i> Location Details
+          </h2>
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <button id="detectLocationBtn" type="button"
+              @click="detectLocation()"
+              class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow-md text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105">
+              <i class="fas fa-location-arrow"></i> Detect My Location
+            </button>
+            <span id="locationStatus" x-text="locationStatusMessage" :class="locationStatusClass" class="text-gray-600 text-sm italic"></span>
+          </div>
+          <div>
+            <label for="jobAddress" class="block text-gray-700 font-medium mb-1">
+              <i class="fas fa-map-pin text-blue-600 mr-1"></i> Full Address
+            </label>
+            <textarea id="jobAddress" name="formattedAddress" rows="3" required
+              x-model="formData.jobAddress"
+              @input="validateStep(2)"
+              :class="{'invalid-field': validationErrors.jobAddress && validationErrors.jobAddress.length > 0}"
+              class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter your full address"></textarea>
+             <p x-show="validationErrors.jobAddress" x-text="validationErrors.jobAddress" class="error-message"></p>
+          </div>
+
+          <div class="flex justify-between mt-6">
+              <button type="button" @click="prevStep()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                  <i class="fas fa-arrow-left mr-2"></i> Previous
+              </button>
+              <button type="button" @click="nextStep(2)" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                  Next <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+          </div>
+        </section>
+
+        <section x-show="currentStep === 3" class="bg-white border border-blue-200 shadow-md rounded-xl p-6 space-y-6 animate-fade-in">
+          <h2 class="text-2xl font-bold text-blue-700 flex items-center">
+            <i class="fas fa-id-card-alt mr-3 text-blue-600"></i> Contact Information
+          </h2>
+          <div>
+            <label for="contactName" class="block text-sm font-medium text-gray-700 mb-1">
+              <i class="fas fa-user text-blue-600 mr-1"></i> Your Name
+            </label>
+            <input type="text" id="contactName" name="name" required placeholder="Your Name"
+              x-model="formData.contactName"
+              @input="validateStep(3)"
+              :class="{'invalid-field': validationErrors.contactName && validationErrors.contactName.length > 0}"
+              class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+             <p x-show="validationErrors.contactName" x-text="validationErrors.contactName" class="error-message"></p>
+          </div>
+          <div>
+            <label for="contactPhone" class="block text-sm font-medium text-gray-700 mb-1">
+              <i class="fas fa-phone text-blue-600 mr-1"></i> Phone Number
+            </label>
+            <input type="tel" id="contactPhone" name="mobile" required placeholder="+91-987654321"
+              x-model="formData.contactPhone"
+              @input="validateStep(3)"
+              :class="{'invalid-field': validationErrors.contactPhone && validationErrors.contactPhone.length > 0}"
+              class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+             <p x-show="validationErrors.contactPhone" x-text="validationErrors.contactPhone" class="error-message"></p>
+          </div>
+
+          <div>
+  <label class="block text-sm font-medium text-gray-700 mb-1">
+    <i class="fas fa-indian-rupee-sign text-blue-600 mr-1"></i>
+    Estimated Budget (₹) <span class="text-gray-400 text-xs">(optional)</span>
+  </label>
+  <input
+    type="number"
+    min="0"
+    x-model="formData.jobBudget"
+    @input="validateStep(1)"
+    :class="{'invalid-field': validationErrors.jobBudget}"
+    class="w-full px-4 py-2 border border-gray-300 rounded-md text-grey-300 focus:ring-2 focus:ring-blue-500"
+    placeholder="e.g. 500 (optional)"
+    name="estimate_budget"
+  />
+  <p x-show="validationErrors.jobBudget" x-text="validationErrors.jobBudget" class="error-message"></p>
+</div>
+
+          <div class="flex justify-between mt-6">
+              <button type="button" @click="prevStep()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                  <i class="fas fa-arrow-left mr-2"></i> Previous
+              </button>
+              <button type="button" @click="nextStep(3)" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                  Next <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+          </div>
+        </section>
+
+        <section x-show="currentStep === 4" class="bg-white border border-blue-200 shadow-md rounded-xl p-6 space-y-6 animate-fade-in">
+          <h2 class="text-2xl font-bold text-blue-700 flex items-center">
+            <i class="fas fa-eye mr-3 text-blue-600"></i> Review Your Job Post
+          </h2>
+          <div class="space-y-4 text-gray-700">
+            <div>
+              <p class="font-semibold text-blue-800">Job Category:</p>
+              <p x-text="formData.jobCategoryLabel || 'N/A'"></p>
+            </div>
+            <div>
+              <p class="font-semibold text-blue-800">Job Description:</p>
+              <p x-text="formData.jobDescription || 'N/A'"></p>
+            </div>
+            <div>
+              <p class="font-semibold text-blue-800">Uploaded Images:</p>
+              <div class="flex flex-wrap gap-2" id="previewImagesReview">
+                <template x-for="(imgSrc, index) in formData.imagePreviews" :key="index">
+                    <img :src="imgSrc" class="w-24 h-24 object-cover rounded-md border border-blue-200 shadow-sm" alt="Preview Image">
+                </template>
+                <p x-show="formData.imagePreviews.length === 0" class="text-gray-500 italic">No images uploaded.</p>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-blue-800">Estimated Budget:</p>
+              <p x-text="formData.jobBudget ? '₹' + formData.jobBudget : 'N/A'"></p>
+            </div>
+            <div>
+              <p class="font-semibold text-blue-800">Full Address:</p>
+              <p x-text="formData.jobAddress || 'N/A'"></p>
+            </div>
+            <div>
+              <p class="font-semibold text-blue-800">Contact Name:</p>
+              <p x-text="formData.contactName || 'N/A'"></p>
+            </div>
+            <div>
+              <p class="font-semibold text-blue-800">Phone Number:</p>
+              <p x-text="formData.contactPhone || 'N/A'"></p>
+            </div>
+          </div>
+
+            <div class="flex justify-between mt-6">
+                    <button type="button" @click="prevStep()"
+                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                     <i class="fas fa-arrow-left mr-2"></i> Previous
+                    </button>
+                    <button type="submit"
+                    class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    <i class="fas fa-paper-plane mr-2"></i> Post Job
+                </button>
+            </div>
+        </section>
+      </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+  <footer class="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 py-16">
+  <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center md:text-left">
+
+      <div>
+        <h4 class="text-2xl font-bold text-white mb-3">ShramSetu</h4>
+        <p class="text-sm leading-relaxed">
+          Empowering skilled laborers by directly connecting them with real job opportunities—without middlemen.
+        </p>
+        <p class="mt-6 text-xs text-gray-400">&copy; 2025 ShramSetu. All rights reserved.</p>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#whyShramSetu" class="hover:text-white transition">Why ShramSetu</a></li>
+          <li><a href="#howItWork" class="hover:text-white transition">How It Works</a></li>
+          <li><a href="#categories" class="hover:text-white transition">Categories</a></li>
+          <li><a href="/benefits" class="hover:text-white transition">Benefits</a></li>
+          <li><a href="/about" class="hover:text-white transition">About Us</a></li>
+          <li><a href="#contact" class="hover:text-white transition">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/privacy" class="hover:text-white transition">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
+          <li><a href="/disclaimer" class="hover:text-white transition">Disclaimer</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+        <div class="flex justify-center md:justify-start space-x-4">
+          <a href="#" class="hover:text-blue-400 transition"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#" class="hover:text-blue-300 transition"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="https://www.linkedin.com/company/shramsetu" class="hover:text-blue-500 transition"><i class="fab fa-linkedin fa-lg"></i></a>
+          <a href="#" class="hover:text-pink-400 transition"><i class="fab fa-instagram fa-lg"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center text-sm text-gray-400 px-4">
+      <p>ShramSetu — Bridging Skilled Talent & Opportunity Across India 🇮🇳</p>
+      <p>Crafted with ❤ by the ShramSetu Team</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function jobPostForm() {
+    return {
+      currentStep: 1,
+      formData: {
+        jobCategory: '',
+        jobCategoryLabel: '',
+        jobDescription: '',
+        jobImages: [],
+        imagePreviews: [],
+        jobAddress: '',
+        contactName: '',
+        contactPhone: '',
+        jobBudget: ''
+      },
+      validationErrors: {},
+      locationStatusMessage: '',
+      locationStatusClass: '',
+
+      initForm() {
+        // Optional init code
+      },
+
+      getCategoryOptions() {
+        return [
+          { value: 'electrician', label: 'Electrician', icon: 'fas fa-bolt' },
+          { value: 'plumber', label: 'Plumber', icon: 'fas fa-wrench' },
+          { value: 'painter', label: 'Painter', icon: 'fas fa-paint-roller' },
+          { value: 'carpenter', label: 'Carpenter', icon: 'fas fa-hammer' },
+          { value: 'mason', label: 'Mason', icon: 'fas fa-toolbox' },
+          { value: 'welder', label: 'Welder', icon: 'fas fa-fire' },
+          { value: 'driver', label: 'Driver', icon: 'fas fa-car' },
+          { value: 'house_cleaner', label: 'House Cleaner', icon: 'fas fa-broom' },
+          { value: 'technician', label: 'Technician', icon: 'fas fa-cogs' },
+          { value: 'labour', label: 'Labour', icon: 'fas fa-people-carry' },
+          { value: 'gardener', label: 'Gardener', icon: 'fas fa-leaf' }
+        ];
+      },
+
+      validateStep(step) {
+        this.validationErrors = {};
+        if (step === 1) {
+          if (!this.formData.jobCategory) this.validationErrors.jobCategory = "Please select a job category.";
+          if (!this.formData.jobDescription) this.validationErrors.jobDescription = "Please enter a job description.";
+          if (this.formData.jobImages.length > 4) this.validationErrors.jobImages = "Only up to 4 images allowed.";
+        } else if (step === 2) {
+          if (!this.formData.jobAddress) this.validationErrors.jobAddress = "Please enter your address.";
+        } else if (step === 3) {
+          if (!this.formData.contactName) this.validationErrors.contactName = "Enter your name.";
+          if (!this.formData.contactPhone || !/^[6-9]\d{9}$/.test(this.formData.contactPhone)) {
+            this.validationErrors.contactPhone = "Enter a valid Indian phone number.";
+          }
+        }
+      },
+
+      nextStep(step) {
+        this.validateStep(step);
+        if (Object.keys(this.validationErrors).length === 0) {
+          this.currentStep++;
+        }
+      },
+
+      prevStep() {
+        if (this.currentStep > 1) this.currentStep--;
+      },
+
+      handleImageUpload(event) {
+        const files = event.target.files;
+        this.formData.jobImages = [];
+        this.formData.imagePreviews = [];
+
+        Array.from(files).slice(0, 4).forEach(file => {
+          this.formData.jobImages.push(file);
+          const reader = new FileReader();
+          reader.onload = e => {
+            this.formData.imagePreviews.push(e.target.result);
+          };
+          reader.readAsDataURL(file);
+        });
+
+        if (files.length > 4) {
+          this.validationErrors.jobImages = "You can upload up to 4 images only.";
+        } else {
+          delete this.validationErrors.jobImages;
+        }
+      },
+
+      removeImage(index) {
+        this.formData.jobImages.splice(index, 1);
+        this.formData.imagePreviews.splice(index, 1);
+      },
+
+      detectLocation() {
+        this.locationStatusMessage = "Detecting your location...";
+        this.locationStatusClass = "text-yellow-500";
+
+        if (!navigator.geolocation) {
+          this.locationStatusMessage = "Geolocation is not supported by your browser.";
+          this.locationStatusClass = "text-red-500";
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+            try {
+              const response = await fetch(\`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=\${latitude}&lon=\${longitude}\`);
+              const data = await response.json();
+              this.formData.jobAddress = data.display_name || \`\${latitude}, \${longitude}\`;
+              this.locationStatusMessage = "Location detected successfully.";
+              this.locationStatusClass = "text-green-500";
+            } catch (error) {
+              this.locationStatusMessage = "Failed to detect location.";
+              this.locationStatusClass = "text-red-500";
+            }
+          },
+          () => {
+            this.locationStatusMessage = "Unable to retrieve your location.";
+            this.locationStatusClass = "text-red-500";
+          }
+        );
+      },
+
+      async submitForm() {
+        this.validateStep(3);
+        if (Object.keys(this.validationErrors).length > 0) return;
+
+        const form = new FormData();
+        form.append('job', this.formData.jobCategory);
+        form.append('description', this.formData.jobDescription);
+        form.append('formattedAddress', this.formData.jobAddress);
+        form.append('name', this.formData.contactName);
+        form.append('mobile', this.formData.contactPhone);
+        form.append('estimate_budget', this.formData.jobBudget || '');
+
+        this.formData.jobImages.forEach((file, idx) => {
+          form.append('pictures[]', file);
+        });
+
+        try {
+          const response = await fetch('/uploadproblem', {
+            method: 'POST',
+            body: form
+          });
+
+          if (response.ok) {
+            alert('✅ Job posted successfully!');
+            window.location.href = '/'; 
+          } else {
+            alert('❌ Something went wrong while posting the job.');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('⚠️ Error submitting the form. Please try again.');
+        }
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
+`;
+
+export default function HireworkerPage() {
+  return <LegacyHtmlPage html={html} />;
+}

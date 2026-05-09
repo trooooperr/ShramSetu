@@ -1,0 +1,286 @@
+import { LegacyHtmlPage } from '../../components/LegacyHtmlPage';
+
+const html = String.raw`
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | ShramSetu</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/2f9e4e5e47.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 1rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+</head>
+
+<body class="bg-[#E3F2FD]">
+
+<div x-data="{ open: false }">
+  <nav class="bg-[#cceaff] shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="/" class="text-3xl font-bold text-blue-700">ShramSetu</a>
+        <div class="hidden lg:flex items-center space-x-6">
+          <a href="/#whyShramSetu" class="text-gray-700 font-semibold hover:text-blue-600">Why ShramSetu</a>
+          <a href="/howToHire" class="text-gray-700 font-semibold hover:text-blue-600">How To Hire</a>
+          <a href="/signup_worker" class="text-gray-700 font-semibold hover:text-blue-600">Find Work</a>
+          <a href="/#categories" class="text-gray-700 font-semibold hover:text-blue-600">Categories</a>
+          <a href="/#benefits" class="text-gray-700 font-semibold hover:text-blue-600">Benefits</a>
+          <a href="/login_user"
+            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-semibold">Join</a>
+        </div>
+        <div class="lg:hidden">
+          <button @click="open = !open" type="button"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-700 hover:bg-blue-100">
+            <svg x-show="!open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg x-show="open" x-cloak class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div x-show="open" x-transition x-cloak @click.away="open = false"
+      class="lg:hidden fixed top-16 left-0 right-0 w-full bg-[#cceaff] px-6 py-4 space-y-3 rounded-b-3xl shadow-md z-40">
+      <a href="/#whyShramSetu" class="flex items-center gap-2 p-2 rounded-xl hover:bg-blue-200 shadow">
+        <div class="w-9 h-9 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <span class="text-base font-medium">Why ShramSetu</span>
+      </a>
+      <a href="/howToHire" class="flex items-center gap-2 p-2 rounded-xl hover:bg-green-100 shadow">
+        <div class="w-9 h-9 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <span class="text-base font-medium">How To Hire</span>
+      </a>
+      <a href="/signup_worker" class="flex items-center gap-2 p-2 rounded-xl hover:bg-indigo-100 shadow">
+        <div class="w-9 h-9 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-hammer"></i>
+        </div>
+        <span class="text-base font-medium">Find Work</span>
+      </a>
+      <a href="/#categories" class="flex items-center gap-2 p-2 rounded-xl hover:bg-sky-100 shadow">
+        <div class="w-9 h-9 bg-sky-100 text-sky-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-th-large"></i>
+        </div>
+        <span class="text-base font-medium">Categories</span>
+      </a>
+      <a href="/#benefits" class="flex items-center gap-2 p-2 rounded-xl hover:bg-pink-100 shadow">
+        <div class="w-9 h-9 bg-pink-100 text-pink-700 rounded-full flex items-center justify-center">
+          <i class="fas fa-users"></i>
+        </div>
+        <span class="text-base font-medium">Benefits</span>
+      </a>
+      <a href="/login_user"
+        class="block text-center mt-4 bg-blue-600 text-white py-2.5 rounded-full font-semibold shadow hover:bg-blue-700 hover:scale-105 transition">
+        <i class="fas fa-arrow-right-to-bracket mr-1"></i> Join Now
+      </a>
+    </div>
+  </nav>
+</div>
+
+  <section class="pt-28 bg-gradient-to-r from-blue-800 to-blue-600 py-12 shadow-md text-center">
+  <div class="max-w-3xl mx-auto px-4" data-aos="fade">
+  <h1 class="text-4xl font-extrabold mb-3 text-blue-100">About ShramSetu</h1>
+  <p class="text-lg font-medium leading-relaxed text-blue-200">Empowering India, One Job at a Time</p>
+  </div>
+</section>
+
+
+
+<!-- WHAT WE STAND FOR -->
+<section class="py-20 px-6 bg-gradient-to-br from-gray-50 to-gray-100" data-aos="fade-up">
+  <div class="max-w-6xl mx-auto text-center mb-12">
+    <h2 class="text-4xl font-extrabold text-blue-800 tracking-wide">What We Stand For</h2>
+    <p class="text-lg text-gray-700 mt-3 max-w-3xl mx-auto">
+      ShramSetu is transforming the Indian labor ecosystem with technology-driven transparency,
+      fair opportunities, and dignity for every worker.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+    <div class="p-8 glass rounded-2xl border border-blue-500/20 hover:scale-105 transition duration-300 shadow-md">
+      <i class="fas fa-handshake text-5xl text-blue-600 mb-4"></i>
+      <h3 class="text-2xl font-bold text-blue-800 mb-3">Trust & Transparency</h3>
+      <p class="text-gray-700">
+        Zero middlemen, no hidden charges. Only fair communication and direct connections.
+      </p>
+    </div>
+
+<div class="p-8 glass rounded-2xl border border-blue-500/20 hover:scale-105 transition duration-300 shadow-md">
+  <i class="fas fa-scale-balanced text-5xl text-blue-600 mb-4"></i>
+  <h3 class="text-2xl font-bold text-blue-800 mb-3">Fair & Commission-Free</h3>
+  <p class="text-gray-700">
+    ShramSetu ensures every worker receives their full earnings—no cuts, no commissions, no exploitation. 100% transparent job connections.
+  </p>
+</div>
+
+    <div class="p-8 glass rounded-2xl border border-blue-500/20 hover:scale-105 transition duration-300 shadow-md">
+      <i class="fas fa-users text-5xl text-blue-600 mb-4"></i>
+      <h3 class="text-2xl font-bold text-blue-800 mb-3">Empowering Millions</h3>
+      <p class="text-gray-700">
+        Creating equal opportunities for skilled laborers across India to grow their earnings.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- VISION & MISSION -->
+<section class="py-20 px-6 bg-white" data-aos="fade-up">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+
+    <!-- Vision -->
+    <div class="p-10 rounded-3xl glass border border-blue-500/20 shadow-xl hover:scale-105 transition duration-300 text-center">
+      <i class="fas fa-eye text-5xl text-blue-600 mb-4"></i>
+      <h3 class="text-3xl font-extrabold text-blue-800 mb-4">Our Vision</h3>
+      <p class="text-gray-700 text-lg leading-relaxed">
+        To build India’s most reliable employment bridge where every skilled worker
+        finds meaningful opportunities—quickly, fairly, and with dignity.
+      </p>
+    </div>
+
+    <!-- Mission -->
+    <div class="p-10 rounded-3xl glass border border-blue-500/20 shadow-xl hover:scale-105 transition duration-300 text-center">
+      <i class="fas fa-bullseye text-5xl text-blue-600 mb-4"></i>
+      <h3 class="text-3xl font-extrabold text-blue-800 mb-4">Our Mission</h3>
+      <p class="text-gray-700 text-lg leading-relaxed">
+        To revolutionize the job discovery system for laborers by using technology,
+        eliminating commissions, improving safety, and enabling fast, verified hiring.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="py-20 px-6 bg-gradient-to-t from-white to-blue-50" data-aos="fade-up">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-center text-4xl font-bold text-blue-800 mb-16">Meet the Team</h2>
+
+    <div class="flex flex-wrap justify-center gap-12">
+
+      <div class="glass border border-blue-200 p-6 rounded-xl text-center hover:shadow-2xl transition" data-aos="zoom-in">
+        <div class="relative w-[200px] h-[260px] mx-auto mb-4 overflow-hidden rounded-lg shadow-lg group">
+          <img src="/legacy/images/alok.jpeg" alt="Alok Kumar Gupta"
+            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-300" />
+          <div class="absolute inset-0 bg-black bg-opacity-10 opacity-0 group-hover:opacity-100 transition"></div>
+        </div>
+        <h4 class="text-2xl font-bold text-[#0D47A1] mb-1">Alok Kumar Gupta</h4>
+        <p class="text-gray-600 text-sm mb-1">Frontend & UI/UX</p>
+        <p class="text-gray-700 text-sm mb-3">Alok envisions a fair, digital-first labor market.<br> His design and user empathy bring ShramSetu’s vision to life.</p>
+        <div class="flex justify-center gap-4 text-blue-700 mb-2">
+          <a href="https://linkedin.com/in/trooperr" target="_blank" class="hover:text-blue-500"><i class="fab fa-linkedin fa-lg"></i></a>
+          <a href="https://twitter.com/trooooperr" target="_blank" class="hover:text-blue-400"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="https://github.com/trooooperr" target="_blank" class="hover:text-gray-800"><i class="fab fa-github fa-lg"></i></a>
+        </div>
+        <p class="italic text-blue-800 text-sm">“We’re not just solving problems — we’re building dignity.”</p>
+      </div>
+
+      <div class="glass border border-blue-200 p-6 rounded-xl text-center hover:shadow-2xl transition" data-aos="zoom-in">
+        <div class="relative w-[200px] h-[260px] mx-auto mb-4 overflow-hidden rounded-lg shadow-lg group">
+          <img src="/legacy/images/chaitanya.jpg" alt="Chaitanya Bishnoi"
+            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-300" />
+          <div class="absolute inset-0 bg-black bg-opacity-10 opacity-0 group-hover:opacity-100 transition"></div>
+        </div>
+        <h4 class="text-2xl font-bold text-[#0D47A1] mb-1">Chaitanya Bishnoi</h4>
+        <p class="text-gray-600 text-sm mb-1">Backend & Execution</p>
+        <p class="text-gray-700 text-sm mb-3">Chaitanya builds resilient systems to power labor access across India.<br> His backend ensures every request meets its response.</p>
+        <div class="flex justify-center gap-4 text-blue-700 mb-2">
+          <a href="https://www.linkedin.com/in/chaitanya-bishnoi-8419a4214/" target="_blank" class="hover:text-blue-500"><i class="fab fa-linkedin fa-lg"></i></a>
+    
+          <a href="https://github.com/Chaitanya123-web" target="_blank" class="hover:text-gray-800"><i class="fab fa-github fa-lg"></i></a>
+        </div>
+        <p class="italic text-blue-800 text-sm">“Stability in systems brings opportunity in lives.”</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <footer class="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 py-16">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center md:text-left">
+
+        <div>
+          <h4 class="text-2xl font-bold text-white mb-3">ShramSetu</h4>
+          <p class="text-sm leading-relaxed">
+            Empowering skilled laborers by directly connecting them with real job opportunities—without middlemen.
+          </p>
+          <p class="mt-6 text-xs text-gray-400">&copy; 2025 ShramSetu. All rights reserved.</p>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#whyShramSetu" class="hover:text-white transition">Why ShramSetu</a></li>
+            <li><a href="#howItWork" class="hover:text-white transition">How It Works</a></li>
+            <li><a href="#categories" class="hover:text-white transition">Categories</a></li>
+            <li><a href="/benefits" class="hover:text-white transition">Benefits</a></li>
+            <li><a href="/about" class="hover:text-white transition">About Us</a></li>
+            <li><a href="#contact" class="hover:text-white transition">Contact Us</a></li>
+          </ul>
+        </div>
+  
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/privacy" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
+            <li><a href="/disclaimer" class="hover:text-white transition">Disclaimer</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+          <div class="flex justify-center md:justify-start space-x-4">
+            <a href="#" class="hover:text-blue-400 transition"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="#" class="hover:text-blue-300 transition"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="https://www.linkedin.com/company/shramsetu" class="hover:text-blue-500 transition"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a href="#" class="hover:text-pink-400 transition"><i class="fab fa-instagram fa-lg"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center text-sm text-gray-400 px-4">
+        <p>ShramSetu — Bridging Skilled Talent & Opportunity Across India 🇮🇳</p>
+        <p>Crafted with ❤️ by the ShramSetu Team</p>
+      </div>
+    </div>
+  </footer>
+
+ <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 900, once: true, delay: 100 });
+</script>
+
+</body>
+
+</html>
+`;
+
+export default function AboutPage() {
+  return <LegacyHtmlPage html={html} />;
+}
